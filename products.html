@@ -1,20 +1,497 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/product.css">
-    <title>Gadgets Store</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gestor I94</title>
+  <!-- Bootstrap CSS (usado en tu repositorio) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap @5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Estilos personalizados -->
+  <style>
+    .fade-in-down {
+      animation: fadeInDown 0.3s ease-out;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body>
-    <a class="btn" id="cartBtn">Cart</a>
-    <div class="products" id="products">
-        <h2>Wait while we load the Products !!</h2>
+<body class="bg-light">
+  <!-- Notificación -->
+  <div id="notification" class="d-none fixed-top bg-success text-white p-2 rounded shadow-sm animate__animated animate__fadeInDown" style="top: 10px; right: 10px; z-index: 1000; max-width: 300px; margin-left: auto;">
+    ¡Mensaje de confirmación!
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky-top" style="z-index: 1000;">
+    <div class="container py-3 d-flex justify-content-between align-items-center">
+      <h1 class="h4 text-primary">Gestor I94</h1>
+      
+      <!-- Campo de búsqueda -->
+      <div class="position-relative w-50">
+        <input type="text" id="searchInput" placeholder="Buscar productos..." 
+               class="form-control ps-5" 
+               style="font-size: 0.9rem; height: 35px;">
+        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+      </div>
+      
+      <!-- Botón de carrito -->
+      <button onclick="toggleCart()" class="btn btn-outline-secondary position-relative">
+        <i class="bi bi-cart" style="font-size: 1.2rem;"></i>
+        <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" style="font-size: 0.8rem;">0</span>
+      </button>
     </div>
+
+    <!-- Categorías -->
+    <div class="bg-light px-3 overflow-x-auto" style="white-space: nowrap;">
+      <div class="container d-flex gap-2 py-2">
+        <button onclick="setActiveCategory('all')" class="btn btn-sm btn-primary rounded-pill">Todas</button>
+        <button onclick="setActiveCategory('Absorbentes')" class="btn btn-sm btn-outline-primary rounded-pill">Absorbentes</button>
+        <button onclick="setActiveCategory('Servilletas')" class="btn btn-sm btn-outline-primary rounded-pill">Servilletas</button>
+        <button onclick="setActiveCategory('Palillos')" class="btn btn-sm btn-outline-primary rounded-pill">Palillos</button>
+        <button onclick="setActiveCategory('Bolsas')" class="btn btn-sm btn-outline-primary rounded-pill">Bolsas</button>
+        <button onclick="setActiveCategory('Papel térmico')" class="btn btn-sm btn-outline-primary rounded-pill">Papel térmico</button>
+        <button onclick="setActiveCategory('Vasos desechables')" class="btn btn-sm btn-outline-primary rounded-pill">Vasos</button>
+        <button onclick="setActiveCategory('Envases')" class="btn btn-sm btn-outline-primary rounded-pill">Envases</button>
+        <button onclick="setActiveCategory('Platos y termopack')" class="btn btn-sm btn-outline-primary rounded-pill">Platos</button>
+        <button onclick="setActiveCategory('Retráctil')" class="btn btn-sm btn-outline-primary rounded-pill">Retráctil</button>
+        <button onclick="setActiveCategory('Ceniceros')" class="btn btn-sm btn-outline-primary rounded-pill">Ceniceros</button>
+        <button onclick="setActiveCategory('Cristaleria')" class="btn btn-sm btn-outline-primary rounded-pill">Cristalería</button>
+        <button onclick="setActiveCategory('Tajín')" class="btn btn-sm btn-outline-primary rounded-pill">Tajín</button>
+        <button onclick="setActiveCategory('Moldes')" class="btn btn-sm btn-outline-primary rounded-pill">Moldes</button>
+        <button onclick="setActiveCategory('Abridores')" class="btn btn-sm btn-outline-primary rounded-pill">Abridores</button>
+        <button onclick="setActiveCategory('Cubiertos')" class="btn btn-sm btn-outline-primary rounded-pill">Cubiertos</button>
+        <button onclick="setActiveCategory('Otros')" class="btn btn-sm btn-outline-primary rounded-pill">Otros</button>
+        <button onclick="setActiveCategory('Venenos')" class="btn btn-sm btn-outline-primary rounded-pill">Venenos</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="container my-4">
+    <h2 class="h4 mb-3">Categoría: <span id="categoryTitle" class="text-primary">Todas</span></h2>
+    
+    <!-- Grid de productos -->
+    <div id="productsGrid" class="row g-3"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white py-3 border-top text-center text-muted">
+    <p class="mb-0">© 2025 Gestor I94. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Carrito -->
+  <div id="cartSidebar" class="d-none fixed-bottom bg-white shadow-lg" style="max-width: 400px; width: 100%; z-index: 1000; height: 100vh; overflow-y: auto;">
+    <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+      <h5 class="mb-0">Tu Carrito</h5>
+      <button onclick="toggleCart()" class="btn btn-sm btn-close"></button>
+    </div>
+    
+    <!-- Formulario de cliente -->
+    <div class="p-3">
+      <div class="mb-3">
+        <label class="form-label">Nombre completo</label>
+        <input type="text" id="customerName" class="form-control form-control-sm" placeholder="Ej: Juan Pérez">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Teléfono</label>
+        <input type="text" id="customerPhone" class="form-control form-control-sm" placeholder="Ej: 5352663106">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Opción de entrega</label>
+        <select id="deliveryOption" onchange="toggleAddressField()" class="form-select form-select-sm">
+          <option value="recogida">Recogida en tienda</option>
+          <option value="mensajeria">Mensajería</option>
+        </select>
+      </div>
+      <div id="addressField" class="mb-3 d-none">
+        <label class="form-label">Dirección de envío</label>
+        <input type="text" id="customerAddress" class="form-control form-control-sm" placeholder="Calle 123, La Habana">
+      </div>
+    </div>
+
+    <!-- Items del carrito -->
+    <div id="cartItems" class="p-3" style="max-height: 60vh; overflow-y: auto;"></div>
+
+    <!-- Resumen y botón de WhatsApp -->
+    <div id="cartSummary" class="p-3 border-top">
+      <div class="d-flex justify-content-between mb-3">
+        <strong>Total:</strong>
+        <span id="totalPrice">₱0.00</span>
+      </div>
+      <button onclick="sendToWhatsApp()" class="btn btn-success w-100 d-flex align-items-center justify-content-center">
+        <i class="bi bi-whatsapp me-2" style="font-size: 1.2rem;"></i> Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- Iconos de Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons @1.10.5/font/bootstrap-icons.css">
+
+  <!-- Script de la tienda -->
+  <script>
+    // Datos de productos
+    const products = [
+      // Absorbentes
+      { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: "https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
+      { id: 2, name: "Absorbente plástico flexible 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
+      { id: 3, name: "Absorbente plástico moldeable 100 unidades", category: "Absorbentes", price: "500.00", stock: 10, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
+      { id: 4, name: "Absorbente para sueros y batidos 9mm ancho 100 unidades", category: "Absorbentes", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
+      { id: 5, name: "Absorbentes clásicos finos 500 unidades 5mm", category: "Absorbentes", price: "1100.00", stock: 8, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
+      
+      // Servilletas
+      { id: 6, name: "Servilleta la excelencia 30x30cm 100 hojas doble", category: "Servilletas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
+      { id: 7, name: "Servilletas prosa 40x40cm 40 hojas doble", category: "Servilletas", price: "500.00", stock: 12, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
+      { id: 8, name: "Servilletas prosito 100 hojas simples 30x33cm", category: "Servilletas", price: "500.00", stock: 20, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
+      
+      // Palillos
+      { id: 9, name: "Púas para cócteles Acero inoxidable", category: "Palillos", price: "200.00", stock: 15, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 10, name: "Paquete de palillos 230 unidades (aprox)", category: "Palillos", price: "300.00", stock: 25, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 11, name: "Palitos para picaderas 100 unidades 10cm", category: "Palillos", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 12, name: "Pomito de palitos de diente 150 unidades (aprox)", category: "Palillos", price: "350.00", stock: 20, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 13, name: "Brochetas de acero inoxidable Aprox 30cm", category: "Palillos", price: "400.00", stock: 15, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Bolsas
+      { id: 14, name: "Bolsas para desechos (negras) Rollo de 25 unidades", category: "Bolsas", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 15, name: "Bolsa de asa troquelada (Papel liner) 29cm (alto) 20cm (ancho) 8cm (fuelle) 20 unidades", category: "Bolsas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 16, name: "Nylon para envasar y sellar 25x45cm 500 unidades", category: "Bolsas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Papel térmico
+      { id: 17, name: "Rollo de papel térmico 57mm x 22m", category: "Papel térmico", price: "250.00", stock: 30, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 18, name: "Rollo de papel térmico 55x60mm", category: "Papel térmico", price: "300.00", stock: 15, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      
+      // Vasos desechables
+      { id: 19, name: "Vasos desechables para café 3onz 100 unidades", category: "Vasos desechables", price: "500.00", stock: 20, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      { id: 20, name: "Vasos desechables 8onz 100 unidades", category: "Vasos desechables", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      
+      // Vasos con tapa
+      { id: 24, name: "Vasos con tapa domo 12onz 50 unidades", category: "Vasos desechables con tapa", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      { id: 25, name: "Vasos con tapa domo 16onz 50 unidades", category: "Vasos desechables con tapa", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      { id: 26, name: "Vaso con tapa plana 16onz 50 unidades", category: "Vasos desechables con tapa", price: "3250.00", stock: 8, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      
+      // Envases
+      { id: 27, name: "Base domo para cake 23cm diametro 9cm alto", category: "Envases", price: "600.00", stock: 10, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
+      { id: 28, name: "Base domo para cake 31.5cm diametro 15cm alto", category: "Envases", price: "750.00", stock: 15, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
+      { id: 29, name: "Envase salsero con tapa 1onz 100 unidades", category: "Envases", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
+      { id: 30, name: "Envase salsero con tapa 2onz 100 unidades", category: "Envases", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
+      { id: 31, name: "Envase rectangular con tapa 8onz 50 unidades Admiten microwave", category: "Envases", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
+      { id: 32, name: "Envase rectangular Deli con tapa 1L~32onz Admiten microwave 25unidades", category: "Envases", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
+      
+      // Platos y termopack
+      { id: 33, name: "Plato desechable (plástico) 22cm 25 unidades", category: "Platos y termopack", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 34, name: "Plato desechable de poliestireno 22cm 25 unidades", category: "Platos y termopack", price: "1100.00", stock: 12, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 35, name: "Bandeja desechable 18.4cm largo 23.7cm ancho 2.76cm alto 125unidades", category: "Platos y termopack", price: "5000.00", stock: 5, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 36, name: "Termopack 7x9 pulgadas 50 unidades", category: "Platos y termopack", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 37, name: "Termopack 8x8 pulgadas 200 unidades", category: "Platos y termopack", price: "13200.00", stock: 8, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Retráctil
+      { id: 38, name: "Rollo de nylon retráctil 2kg 45cm", category: "Retráctil", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 39, name: "Retráctil blanco 3.5kg 50cm", category: "Retráctil", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 40, name: "Nylon retráctil amarillo profesional (nylon extra fino) 45.7cm (alto) 609.6m (largo) viene con su cuchilla para cortar", category: "Retráctil", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 41, name: "Rollo de nylon retráctil blanco 50cm alto 6kg", category: "Retráctil", price: "7000.00", stock: 5, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 42, name: "Nylon retráctil amarillo profesional (nylon extra fino) 60.9cm (alto) 609.6m (largo) viene con su cuchilla para cortar", category: "Retráctil", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 43, name: "Retráctil profesional blanco 50cm 9kg", category: "Retráctil", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 44, name: "Retráctil profesional 45.72cm x 1520m", category: "Retráctil", price: "15000.00", stock: 3, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      { id: 45, name: "Retráctil profesional Para alimentos 45cm x 1500m", category: "Retráctil", price: "15000.00", stock: 3, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
+      
+      // Ceniceros
+      { id: 46, name: "Cenicero de cristal clásico 10.5cm", category: "Ceniceros", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 47, name: "Cenicero de vidrio Forma de flor", category: "Ceniceros", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 48, name: "Cenicero de cristal cuadrado 10.6cm", category: "Ceniceros", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 49, name: "Ceniceros circular para tabacos Cristal fuerte Grande", category: "Ceniceros", price: "2300.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Cristalería
+      { id: 50, name: "Jarra de cristal para batido Viene con su absorbente 500ml~16onz", category: "Cristaleria", price: "1000.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 51, name: "Jarra con tapa y absorbente Forma de cactus 500ml~16o", category: "Cristaleria", price: "1000.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 52, name: "Vasos para ron Estilo boston chiquitos 55ml-1.86onz 6 unidades", category: "Cristaleria", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 53, name: "Shots para tequila (diseño elegante) 50ml~1.69onz 6 unidades", category: "Cristaleria", price: "1800.00", stock: 10, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 54, name: "Vaso para shots de tequila Cristal 6 unidades 50ml ~1.69onz", category: "Cristaleria", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 55, name: "Vasos para shots de tequila 6 unidades 50ml-1.69onz Colores disponibles Azul Rosa", category: "Cristaleria", price: "1800.00", stock: 10, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 56, name: "Jarra para cerveza 2 unidades 510 ml~17onz", category: "Cristaleria", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 57, name: "Vasos para ron 6 unidades 170 ml ~5.8onz", category: "Cristaleria", price: "2200.00", stock: 12, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 58, name: "Tazas para té 250ml~8.5onz 6 unidades Vasos (modelo San Marco) (No son Havana Club) 6 unidades 300ml ~10onz", category: "Cristaleria", price: "2800.00", stock: 15, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 59, name: "Vasos para tragos 6 unidades 270 ml~9.13onz", category: "Cristaleria", price: "2900.00", stock: 10, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 60, name: "Vasos para whisky 270ml~9onz 6 unidades", category: "Cristaleria", price: "3000.00", stock: 10, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 61, name: "Dulceras de cristal 6 unidades", category: "Cristaleria", price: "3000.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 62, name: "Jarras para batidos 300ml~10onz 6 unidades", category: "Cristaleria", price: "3500.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 63, name: "Juegos de tazas para café 6 unidades Vienen con sus platicos cada una 80ml~2.70onz", category: "Cristaleria", price: "3500.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      { id: 64, name: "Copas para agua y vino 435ml~14.7onz 6 unidades agotado Copas para vino y agua 435ml~14.7onz 6 unidades", category: "Cristaleria", price: "5000.00", stock: 10, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      
+      // Tajín
+      { id: 65, name: "Tajín 142gr", category: "Tajín", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 66, name: "Chile en polvo con limón Aurrera (Tajín) 160gr", category: "Tajín", price: "1900.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Moldes
+      { id: 67, name: "Molde para empanadas", category: "Moldes", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 68, name: "Moldes para cookies 12 piezas", category: "Moldes", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 69, name: "Molde para hamburguesa Acero inoxidable 10.6cm diámetro 2.5cm alto", category: "Moldes", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 70, name: "Molde de repostería metálico 22cm", category: "Moldes", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 71, name: "Molde de repostería metálico 28x15cm", category: "Moldes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 72, name: "Molde de respostería en forma de oso", category: "Moldes", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 73, name: "Bandeja tortera 47x32cm", category: "Moldes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      
+      // Abridores
+      { id: 74, name: "Abridor de botella", category: "Abridores", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 75, name: "Sacacorchos metálico", category: "Abridores", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 76, name: "Abridor de lata metálico", category: "Abridores", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 77, name: "Abridor para botella de cerveza Acero inoxidable 18cm", category: "Abridores", price: "1800.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Cubiertos
+      { id: 78, name: "Cucharitas para café 6 unidades 10cm", category: "Cubiertos", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 79, name: "Cuchara de metal 6 unidades 19cm", category: "Cubiertos", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 80, name: "Tenedores de metal 6 unidades 19cm", category: "Cubiertos", price: "1000.00", stock: 12, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 81, name: "Cuchillos de mesa 23cm 6u", category: "Cubiertos", price: "1000.00", stock: 12, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 82, name: "Cuchara de metal 18cm 12 unidades", category: "Cubiertos", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 83, name: "Tenedores desechables Transparentes 100 unidades", category: "Cubiertos", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 84, name: "Cucharas desechables Transparentes 100 unidades", category: "Cubiertos", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 85, name: "Cuchillo sierra de acero inoxidable 22cm 6unidades Ideal para cortes de carnes", category: "Cubiertos", price: "1600.00", stock: 8, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 86, name: "Cuchillo tipo hacha 30cm", category: "Cubiertos", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 87, name: "Set de cuchillos 5 piezas", category: "Cubiertos", price: "4000.00", stock: 5, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Otros
+      { id: 88, name: "Frazada de piso", category: "Otros", price: "250.00", stock: 15, image: " https://images.unsplash.com/photo-1588612548619-a3b2f24d96d2?auto=format&fit=crop&w=300&q=80" },
+      { id: 89, name: "Esponjas multiusos 10 unidades", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1588612548619-a3b2f24d96d2?auto=format&fit=crop&w=300&q=80" },
+      { id: 90, name: "Mini soporte para tacos", category: "Otros", price: "600.00", stock: 20, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 91, name: "Set de limpieza 2 estropajos 2 esponjas 1 portaestropajos", category: "Otros", price: "600.00", stock: 20, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 92, name: "Cortador de papa", category: "Otros", price: "650.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 93, name: "Pinza media luna 29cm aprox Acero inoxidable", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 94, name: "Pinza de acero inoxidable 28.5 cm alto", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 95, name: "Tamiz de polvo Colador de filtro fino", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 96, name: "Servilletero Acero inoxidable", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 97, name: "Rebanador de papa", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 98, name: "Aplastador de papa", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 99, name: "Salsa para michelada 320 ml", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 100, name: "Paquete de ligas 170-180 unidades", category: "Otros", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 101, name: "Servilletero para exteriores Acero inoxidable Ideal para lugares abiertos o con mucho aire Su presilla no permite que las servilletas se vuelen", category: "Otros", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 102, name: "Precinta transparente (Scotch Tape) Medidas: 5cm (ancho)×11cm (diámetro)×1.5cm (grosor) 100metros", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 103, name: "Cesta tejida para pan (plástica) 23cm×13cm(base)×9cm(alto)", category: "Otros", price: "1000.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 104, name: "Juego de embudos de 3 piezas", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 105, name: "Exprimidor de naranja", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 106, name: "Palas plásticas multiusos 3 unidades", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 107, name: "Set de 3 pinzas multiusos Medidas: -28cm -22cm -18cm", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 108, name: "Manga inyectora plástica Se utiliza para el relleno y decoración de dulces 8 boquillas", category: "Otros", price: "1100.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 109, name: "Rollo de pegatina para precios 2000 pegatinas", category: "Otros", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 110, name: "Soporte para tacos Acero inoxidable", category: "Otros", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 111, name: "Set de repostería (con brocha)", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 112, name: "Set de repostería Boquillas más grandes", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 113, name: "Rallador", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 114, name: "Cepillo y recogedor manual Colores disponibles Azul Verde Rosa", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 115, name: "Espumadera para freir (Escurridor de grasa)", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 116, name: "Capacillos para cupcake 1000 unidades", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 117, name: "Salsa picante tabasco 60 ml", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 118, name: "Deshidratados ✓ Durabilidad de 6 meses a 1 año ✓ Conserva las propiedades ✓ Ideal para decorar cócteles, postres y guarniciones ✓ 25 gr equivale a 100 gr de fruta fresca DISPONIBLES •Coco:350gr Limon: 150gr", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 119, name: "Set de coladores 3 piezas", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 120, name: "Pala para hielo Acero inoxidable", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 121, name: "Afilador manual para cuchillos", category: "Otros", price: "1600.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 122, name: "Triturador de ajo Acero inoxidable", category: "Otros", price: "1700.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 123, name: "Cuchillos BBQ 42 cm", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 124, name: "Dispensadores para salsas 2 unidades", category: "Otros", price: "1800.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 125, name: "Tenedor para BBQ 38.6x3.8cm Mango de madera", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 126, name: "Rodillo de acero inoxidable Mango de madera Centro giratorio", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 127, name: "Rodillo de silicona Antiadherente Mango de madera Centro giratorio", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 128, name: "Colador de espiral", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 129, name: "Set de cocina 5 piezas", category: "Otros", price: "2300.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+
+      // Otros 2
+      { id: 130, name: "Espátula para dulce", category: "Otros", price: "1800.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 131, name: "Hielera plástica Solo para hielo, no botellas Incluye 1 pinza", category: "Otros", price: "2500.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 132, name: "Rejilla para asar pescado", category: "Otros", price: "3000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 133, name: "Set de 3 piezas BBQ Tenedor Pinza Espátula", category: "Otros", price: "3500.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 134, name: "Sombrillitas desechables 100 unidades", category: "Otros", price: "4000.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 135, name: "Cesto para basura de 50L Color disponible: Carmelita", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 136, name: "Cesto para basura de 50L", category: "Otros", price: "8000.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      
+      // Venenos
+      { id: 137, name: "Veneno para moscas 100 unidades", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 138, name: "Veneno para hormigas", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 139, name: "Veneno para cucarachas 8gramos", category: "Venenos", price: "200.00", stock: 25, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 140, name: "Incienso para mosquitos Aprox 30u", category: "Venenos", price: "450.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+    ];
+
+    let cart = [];
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let customerInfo = { name: '', phone: '', deliveryOption: 'recogida', address: '' };
+
+    // Inicializar categorías y productos
+    function initCategories() {
+      const categories = [...new Set(products.map(p => p.category))];
+      categories.unshift('all');
+      const container = document.querySelector('.container');
+      container.innerHTML = ''; // Limpia y rellena
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `btn btn-sm ${cat === 'all' ? 'btn-primary' : 'btn-outline-primary'} rounded-pill me-2`;
+        btn.textContent = cat === 'all' ? 'Todas' : cat;
+        btn.onclick = () => setActiveCategory(cat);
+        container.appendChild(btn);
+      });
+    }
+
+    function setActiveCategory(category) {
+      activeCategory = category;
+      document.getElementById('categoryTitle').textContent = (activeCategory === 'all') ? 'Todas' : activeCategory;
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      
+      const filtered = products.filter(product => 
+        (activeCategory === 'all' || product.category === activeCategory) &&
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">No se encontraron productos.</p></div>`;
+        return;
+      }
+
+      filtered.forEach(product => {
+        const col = document.createElement('div');
+        col.className = 'col-6 col-sm-4 col-md-3 col-lg-3';
+
+        const card = document.createElement('div');
+        card.className = 'card h-100';
+        card.innerHTML = `
+          <img src="${product.image}" class="card-img-top" style="height: 150px; object-fit: cover;" />
+          <div class="card-body d-flex flex-column">
+            <h6 class="card-title">${product.name}</h6>
+            <p class="card-text text-primary">₱${product.price}</p>
+            <p class="card-text text-muted">${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}</p>
+            <button onclick="addToCart(${product.id})" ${product.stock <= 0 ? 'disabled' : ''} 
+                    class="btn ${product.stock > 0 ? 'btn-success btn-sm' : 'btn-secondary btn-sm disabled'} mt-auto">
+              ${product.stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
+            </button>
+          </div>
+        `;
+        col.appendChild(card);
+        grid.appendChild(col);
+      });
+    }
+
+    function toggleCart() {
+      const cartSidebar = document.getElementById('cartSidebar');
+      cartSidebar.classList.toggle('d-none');
+      if (!cartSidebar.classList.contains('d-none')) updateCart();
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      if (!product || product.stock <= 0) return;
+
+      const existingItem = cart.find(item => item.id === id);
+      if (existingItem) {
+        cart = cart.map(item => 
+          item.id === id ? {...item, quantity: item.quantity + 1} : item
+        );
+      } else {
+        cart.push({...product, quantity: 1});
+      }
+      updateCart();
+      showNotification(`Añadido al carrito: ${product.name}`);
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = `<p class="text-center text-muted py-4">Tu carrito está vacío</p>`;
+        document.getElementById('cartSummary').classList.add('d-none');
+        document.getElementById('cartCount').textContent = '0';
+        document.getElementById('cartCount').classList.add('d-none');
+        return;
+      }
+
+      let totalPrice = 0;
+      cart.forEach(item => {
+        totalPrice += parseFloat(item.price) * item.quantity;
+        const row = document.createElement('div');
+        row.className = 'd-flex align-items-center mb-3';
+        row.innerHTML = `
+          <img src="${item.image}" class="rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
+          <div class="flex-grow-1">
+            <small>${item.name}</small><br>
+            <small class="text-primary">₱${item.price}</small>
+          </div>
+          <div class="d-flex align-items-center ms-2">
+            <button onclick="updateQuantity(${item.id}, -1)" class="btn btn-sm btn-outline-secondary">-</button>
+            <span class="mx-2">${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, 1)" class="btn btn-sm btn-outline-secondary">+</button>
+          </div>
+        `;
+        cartItems.appendChild(row);
+      });
+
+      document.getElementById('totalPrice').textContent = `₱${totalPrice.toFixed(2)}`;
+      document.getElementById('cartSummary').classList.remove('d-none');
+      document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartCount').classList.remove('d-none');
+    }
+
+    function updateQuantity(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + delta);
+        updateCart();
+      }
+    }
+
+    function sendToWhatsApp() {
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const deliveryOption = document.getElementById('deliveryOption').value;
+      const address = document.getElementById('customerAddress').value.trim();
+      
+      if (!name || !phone) {
+        showNotification('Completa tu nombre y teléfono');
+        return;
+      }
+
+      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\n`);
+      if (deliveryOption === 'mensajeria' && address) {
+        message += encodeURIComponent(`Dirección: ${address}\n`);
+      }
+      message += encodeURIComponent(`\nProductos:\n`);
+      cart.forEach(item => {
+        message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
+      });
+      message += encodeURIComponent(`\nTotal: ₱${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`);
+
+      window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
+      cart = [];
+      updateCart();
+      toggleCart();
+      showNotification('Pedido enviado por WhatsApp');
+    }
+
+    function showNotification(text) {
+      const notification = document.getElementById('notification');
+      notification.textContent = text;
+      notification.classList.remove('d-none');
+      setTimeout(() => notification.classList.add('d-none'), 3000);
+    }
+
+    function toggleAddressField() {
+      const addressField = document.getElementById('addressField');
+      addressField.classList.toggle('d-none', document.getElementById('deliveryOption').value !== 'mensajeria');
+    }
+
+    // Evento de búsqueda
+    document.getElementById('searchInput').addEventListener('input', e => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      initCategories();
+      renderProducts();
+    });
+  </script>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="script/products.js"></script>
 </html>
