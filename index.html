@@ -303,7 +303,7 @@
     ];
 
     let cart = [];
-    let activeCategory = 'all';
+    let activeCategory = 'Categorías';
     let searchQuery = '';
     
     function toggleCart() {
@@ -337,29 +337,42 @@
       }
     }
 
-    function sendToWhatsApp() {
-      if (cart.length === 0) return showNotification('El carrito está vacío');
-      const name = document.getElementById('customerName').value.trim();
-      const phone = document.getElementById('customerPhone').value.trim();
-      const deliveryOption = document.getElementById('deliveryOption').value;
-      const address = document.getElementById('customerAddress').value.trim();
+    const sendToWhatsApp = () => {
+  if (cart.length === 0) {
+    showNotification('El carrito está vacío');
+    return;
+  }
 
-      if (!name || !phone) return showNotification('Completa tu nombre y teléfono');
+  const name = document.getElementById('customerName')?.value.trim();
+  const phone = document.getElementById('customerPhone')?.value.trim();
+  const deliveryOption = document.getElementById('deliveryOption')?.value;
+  const address = document.getElementById('customerAddress')?.value.trim();
 
-      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}`);
-      if (deliveryOption === 'mensajeria' && address) {
-        message += encodeURIComponent(`\nDirección: ${address}`);
-      }
-      cart.forEach(item => {
-        message += encodeURIComponent(`\n${item.name} - Cantidad: ${item.quantity}`);
-      });
-      message += encodeURIComponent(`\nTotal: ₱${getTotalPrice().toFixed(2)}`);
+  if (!name || !phone) {
+    showNotification('Completa tu nombre y teléfono');
+    return;
+  }
 
-      window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
-      cart = [];
-      updateCart();
-      toggleCart();
-      showNotification('Pedido enviado por WhatsApp');
+  // Construir mensaje
+  let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}`);
+  
+  if (deliveryOption === 'mensajeria' && address) {
+    message += encodeURIComponent(`\nOpción: Mensajería\nDirección: ${address}`);
+  } else {
+    message += encodeURIComponent('\nOpción: Recogida en tienda');
+  }
+
+  message += encodeURIComponent('\n\nProductos:');
+  cart.forEach((item) => {
+    message += encodeURIComponent(`\n${item.name} - Cantidad: ${item.quantity}`);
+  });
+  message += encodeURIComponent(`\n\nTotal: ₱${getTotalPrice()}`);
+
+  window.open(`https://wa.me/5352663106?text=${message}`, '_blank');
+  setCart([]);
+  setShowCart(false);
+  showNotification('Pedido enviado por WhatsApp');
+};
     }
 
     function getProductsByCategory(category) {
