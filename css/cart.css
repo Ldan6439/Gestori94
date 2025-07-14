@@ -1,45 +1,40 @@
-body{
-    background-color: #ede2fa;
-    text-align: center;
-}
-button{
-    padding: 5px;
-    color: #efd8fa;
-    border-radius: 5px;
-    font-size: large;
-    cursor: pointer;
-    text-decoration:none;
-    border: 1px solid #9c58ad;
-    color: #efd8fa;
-    background: #9306b6;
-}
-.removeBtn{
-    border: 1px solid #640207;
-    color: #efd8fa;
-    background: #b6063b;
-}
-.removeBtn:hover{
-    color: #ffff;
-}
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    font-size: larger;
-    text-align: center;
-}
+function sendToWhatsApp() {
+  if (cart.length === 0) {
+    showNotification('El carrito está vacío');
+    return;
+  }
 
-td, th {
-    border: 2px solid #8f6797;
-    text-align: left;
-    padding: 8px;
-}
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const deliveryOption = document.getElementById('deliveryOption').value;
+  const address = document.getElementById('customerAddress').value.trim();
 
-tr:nth-child(even) {
-    background-color: #d0b8df;
-}
+  if (!name || !phone) {
+    showNotification('Completa tu nombre y teléfono');
+    return;
+  }
 
-h2,h3{
-    text-align: center;
-    color: #35013f;
+  // Construir mensaje
+  let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}`);
+  
+  if (deliveryOption === 'mensajeria' && address) {
+    message += encodeURIComponent(`\nOpción: Mensajería\nDirección: ${address}`);
+  } else {
+    message += encodeURIComponent('\nOpción: Recogida en tienda');
+  }
+
+  message += encodeURIComponent('\n\nProductos:');
+  cart.forEach(item => {
+    message += encodeURIComponent(`\n${item.name} - Cantidad: ${item.quantity}`);
+  });
+  message += encodeURIComponent(`\n\nTotal: ₱${getTotalPrice()}`);
+
+  // Enviar mensaje
+  window.open(`https://wa.me/5352663106?text=${message}`, '_blank');
+  
+  // Limpiar carrito
+  cart = [];
+  updateCart();
+  toggleCart();
+  showNotification('Pedido enviado por WhatsApp');
 }
