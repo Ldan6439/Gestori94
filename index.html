@@ -7,7 +7,9 @@
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com "></script>
   <style>
-    .fade-in-down { animation: fadeInDown 0.3s ease-out; }
+    .fade-in-down {
+      animation: fadeInDown 0.3s ease-out;
+    }
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -35,7 +37,6 @@
   <header class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
       <h1 class="text-2xl font-bold text-indigo-600">Gestor I94</h1>
-      
       <div class="relative w-full sm:w-64">
         <input type="text" placeholder="Buscar productos..." 
                id="searchInput" 
@@ -44,12 +45,10 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-
       <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors w-12 h-12">
         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-          </path>
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
         </svg>
         <span id="cartCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
       </button>
@@ -120,12 +119,12 @@
           
           <input type="text" id="customerAddress" placeholder="Dirección de envío (opcional)" class="w-full px-3 py-2 border rounded hidden" />
         </div>
-
+        
         <div class="flex justify-between mb-4">
           <span class="font-bold">Total:</span>
           <span id="totalPrice" class="font-bold">₱0.00</span>
         </div>
-
+        
         <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold flex items-center justify-center">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.072.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
@@ -138,7 +137,7 @@
 
   <!-- Script de la tienda -->
   <script>
-    // Array de productos completo
+    // Productos completos
     const products = [
       // Absorbentes
       { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
@@ -211,7 +210,7 @@
       { id: 48, name: "Cenicero de cristal cuadrado 10.6cm", category: "Ceniceros", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 49, name: "Ceniceros circular para tabacos Cristal fuerte Grande", category: "Ceniceros", price: "2300.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       
-      // Cristalería
+      // Cristaleria
       { id: 50, name: "Jarra de cristal para batido Viene con su absorbente 500ml~16onz", category: "Cristaleria", price: "1000.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
       { id: 51, name: "Jarra con tapa y absorbente Forma de cactus 500ml~16o", category: "Cristaleria", price: "1000.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
       { id: 52, name: "Vasos para ron Estilo boston chiquitos 55ml-1.86onz 6 unidades", category: "Cristaleria", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
@@ -315,16 +314,20 @@
       { id: 138, name: "Veneno para hormigas", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 139, name: "Veneno para cucarachas 8gramos", category: "Venenos", price: "200.00", stock: 25, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 140, name: "Incienso para mosquitos Aprox 30u", category: "Venenos", price: "450.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" }
+      { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
     ];
 
     let cart = [];
     let activeCategory = 'all';
     let searchQuery = '';
-    
+    let customerInfo = { name: '', phone: '', deliveryOption: 'recogida', address: '' };
+
+    // Funciones principales
     function toggleCart() {
       document.getElementById('cartSidebar').classList.toggle('hidden');
-      if (!document.getElementById('cartSidebar').classList.contains('hidden')) updateCart();
+      if (!document.getElementById('cartSidebar').classList.contains('hidden')) {
+        updateCart();
+      }
     }
 
     function setActiveCategory(category) {
@@ -355,37 +358,21 @@
 
     function sendToWhatsApp() {
       if (cart.length === 0) return showNotification('El carrito está vacío');
-      const name = document.getElementById('customerName').value.trim();
-      const phone = document.getElementById('customerPhone').value.trim();
-      const deliveryOption = document.getElementById('deliveryOption').value;
-      const address = document.getElementById('customerAddress').value.trim();
-
-      if (!name || !phone) return showNotification('Completa tu nombre y teléfono');
-
-      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}`);
-      if (deliveryOption === 'mensajeria' && address) {
-        message += encodeURIComponent(`\nDirección: ${address}`);
+      if (!document.getElementById('customerName').value || !document.getElementById('customerPhone').value) {
+        return showNotification('Por favor complete nombre y teléfono');
       }
-      cart.forEach(item => {
-        message += encodeURIComponent(`\n${item.name} - Cantidad: ${item.quantity}`);
+
+      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${document.getElementById('customerName').value}\nTeléfono: ${document.getElementById('customerPhone').value}\nOpción: ${document.getElementById('deliveryOption').value === 'mensajeria' ? `Dirección: ${document.getElementById('customerAddress').value}\n` : ''}\nProductos:\n`);
+      cart.forEach((item) => {
+        message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
       });
       message += encodeURIComponent(`\nTotal: ₱${getTotalPrice().toFixed(2)}`);
-
+      
       window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
       cart = [];
       updateCart();
       toggleCart();
       showNotification('Pedido enviado por WhatsApp');
-    }
-
-    function getProductsByCategory(category) {
-      return products.filter(p => p.category === category);
-    }
-
-    function getFilteredProducts() {
-      return products.filter(p => 
-        (activeCategory === 'all' || p.category === activeCategory) && p.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
     }
 
     function getTotalPrice() {
@@ -414,14 +401,16 @@
           </div>
           <div class="flex items-center">
             <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
-            <span class="mx-2">${item.quantity}</span>
+            <span class="mx-2 w-8 text-center">${item.quantity || 1}</span>
             <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+          </div>
         `;
         cartItems.appendChild(cartItem);
       });
 
       document.getElementById('cartSummary').classList.remove('hidden');
-      document.getElementById('cartCount').classList.remove('hidden');
+      document.getElementById('totalPrice').innerText = `₱${getTotalPrice()}`;
+      document.getElementById('cartCount').classList.toggle('hidden', cart.length === 0);
       document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
     }
 
@@ -429,13 +418,13 @@
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = '';
       
-      const filtered = products.filter(p => 
-        (activeCategory === 'all' || p.category === activeCategory) &&
-        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = products.filter(product => 
+        (activeCategory === 'all' || product.category === activeCategory) && 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-gray-500">No se encontraron productos</p></div>`;
+        grid.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-gray-500 text-xl">No se encontraron productos.</p></div>`;
         return;
       }
 
@@ -443,15 +432,13 @@
         const card = document.createElement('div');
         card.className = "bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col";
         card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
-          <div class="p-4 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 class="font-semibold text-lg mb-1">${product.name}</h3>
-              <p class="text-gray-600 mb-2">₱${product.price}</p>
-              <p class="text-sm text-gray-500">${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}</p>
-            </div>
+          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" />
+          <div class="p-4 flex-grow flex flex-col">
+            <h3 class="font-semibold text-lg mb-1">${product.name}</h3>
+            <p class="text-gray-600 mb-2">₱${product.price}</p>
+            <p class="text-sm text-gray-500 mb-4">${product.stock > 1 ? `Stock: ${product.stock}` : 'Agotado'}</p>
             <button onclick="addToCart(${product.id})" ${product.stock <= 0 ? 'disabled' : ''} 
-                    class="mt-4 py-2 px-4 rounded-full font-medium transition-colors ${product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed' }">
+                    class="mt-4 py-2 px-4 rounded-full font-medium transition-colors ${product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}">
               ${product.stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
             </button>
           </div>
@@ -463,7 +450,6 @@
     function addToCart(id) {
       const product = products.find(p => p.id === id);
       if (!product || product.stock <= 0) return;
-      
       const existingItem = cart.find(item => item.id === id);
       if (existingItem) {
         cart = cart.map(item => item.id === id ? {...item, quantity: item.quantity + 1} : item);
@@ -474,12 +460,7 @@
       showNotification(`Añadido al carrito: ${product.name}`);
     }
 
-    function getTotalPrice() {
-      return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
-    }
-
-    // Inicialización
-    document.getElementById('searchInput').addEventListener('input', e => {
+    document.getElementById('searchInput').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderProducts();
     });
