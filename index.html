@@ -6,7 +6,13 @@
   <title>Gestor I94</title>
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com "></script>
-<link rel="stylesheet" href="styles.css">
+  <style>
+    .fade-in-down { animation: fadeInDown 0.3s ease-out; }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body class="bg-gray-50">
   <!-- Notificación -->
@@ -39,23 +45,13 @@
         </svg>
       </div>
 
-      <button onclick="addToCart(1)" class="add-to-cart-btn">Agregar al carrito
-      let cart = [];
-function addToCart(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product || product.stock <= 0) return;
-
-  const existingItem = cart.find(item => item.id === productId);
-  if (existingItem) {
-    cart = cart.map(item => 
-      item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
-    );
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-  updateCart();
-  showNotification(`Añadido al carrito: ${product.name}`);
-}
+      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors w-12 h-12">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+          </path>
+        </svg>
+        <span id="cartCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
       </button>
     </div>
     
@@ -100,30 +96,46 @@ function addToCart(productId) {
   </footer>
 
   <!-- Carrito -->
-  <div className="space-y-3 mb-4">
-  <input 
-    id="customerName" 
-    type="text" 
-    placeholder="Nombre completo" 
-    className="w-full px-3 py-2 border rounded"
-  />
-  <input 
-    id="customerPhone" 
-    type="text" 
-    placeholder="Teléfono (ej: 5352663106)" 
-    className="w-full px-3 py-2 border rounded"
-  />
-  <select id="deliveryOption" onChange={toggleAddressField} className="w-full px-3 py-2 border rounded">
-    <option value="recogida">Recogida en tienda</option>
-    <option value="mensajeria">Mensajería</option>
-  </select>
-  <input 
-    id="customerAddress" 
-    type="text" 
-    placeholder="Dirección de envío (opcional)" 
-    className="w-full px-3 py-2 border rounded hidden"
-  />
-</div>
+  <div id="cartSidebar" class="fixed inset-0 z-50 hidden">
+    <div onclick="toggleCart()" class="fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative bg-white w-full max-w-md ml-auto h-full shadow-xl flex flex-col">
+      <div class="p-6 border-b flex justify-between items-center">
+        <h2 class="text-xl font-bold">Tu Carrito</h2>
+        <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="cartItems" class="flex-grow overflow-y-auto p-6"></div>
+      <div id="cartSummary" class="border-t p-6 hidden">
+        <div class="space-y-3 mb-4">
+          <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded" required />
+          <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded" required />
+          
+          <select id="deliveryOption" onchange="toggleAddressField()" class="w-full px-3 py-2 border rounded">
+            <option value="recogida">Recogida en tienda</option>
+            <option value="mensajeria">Mensajería</option>
+          </select>
+          
+          <input type="text" id="customerAddress" placeholder="Dirección de envío (opcional)" class="w-full px-3 py-2 border rounded hidden" />
+        </div>
+
+        <div class="flex justify-between mb-4">
+          <span class="font-bold">Total:</span>
+          <span id="totalPrice" class="font-bold">₱0.00</span>
+        </div>
+
+        <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold flex items-center justify-center">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.072.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          </svg>
+          Enviar pedido por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Script de la tienda -->
   <script>
     // Array de productos completo
@@ -306,31 +318,6 @@ function addToCart(productId) {
       { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" }
     ];
 
-    function updateCart() {
-  const cartItems = document.getElementById('cartItems');
-  cartItems.innerHTML = '';
-  
-  if (cart.length === 0) {
-    cartItems.innerHTML = '<p>Tu carrito está vacío</p>';
-  } else {
-    cart.forEach(item => {
-      const cartItem = document.createElement('div');
-      cartItem.className = 'cart-item';
-      cartItem.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" />
-        <span>${item.name} - Cantidad: ${item.quantity}</span>
-      `;
-      cartItems.appendChild(cartItem);
-    });
-  }
-}
-
-function showNotification(text) {
-  const notification = document.getElementById('notification');
-  notification.innerText = text;
-  notification.classList.remove('hidden');
-  setTimeout(() => notification.classList.add('hidden'), 3000);
-}
     let cart = [];
     let activeCategory = 'all';
     let searchQuery = '';
