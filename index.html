@@ -1,140 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Gestor I94</title>
-  <!-- Bootstrap CSS (usado en tu repositorio) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap @5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Estilos personalizados -->
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com "></script>
   <style>
-    .fade-in-down {
-      animation: fadeInDown 0.3s ease-out;
-    }
+    .fade-in-down { animation: fadeInDown 0.3s ease-out; }
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="bg-light">
+<body class="bg-gray-50">
   <!-- Notificación -->
-  <div id="notification" class="d-none fixed-top bg-success text-white p-2 rounded shadow-sm animate__animated animate__fadeInDown" style="top: 10px; right: 10px; z-index: 1000; max-width: 300px; margin-left: auto;">
-    ¡Mensaje de confirmación!
+  <div id="notification" class="hidden fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 fade-in-down"></div>
+
+  <!-- Hero Section -->
+  <div class="relative bg-indigo-900 text-white">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1588612548619-a3b2f24d96d2?auto=format&fit=crop&w=1920&q=80" 
+           alt="Mercado de desechables" 
+           class="w-full h-64 object-cover opacity-30" />
+    </div>
+    <div class="container mx-auto px-4 py-16 relative">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Gestor I94</h1>
+      <p class="text-xl md:text-2xl max-w-3xl">Tu proveedor confiable para productos de mercado y desechables</p>
+    </div>
   </div>
 
   <!-- Header -->
-  <header class="bg-white shadow-sm sticky-top" style="z-index: 1000;">
-    <div class="container py-3 d-flex justify-content-between align-items-center">
-      <h1 class="h4 text-primary">Gestor I94</h1>
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <h1 class="text-2xl font-bold text-indigo-600">Gestor I94</h1>
       
-      <!-- Campo de búsqueda -->
-      <div class="position-relative w-50">
-        <input type="text" id="searchInput" placeholder="Buscar productos..." 
-               class="form-control ps-5" 
-               style="font-size: 0.9rem; height: 35px;">
-        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+      <div class="relative w-full sm:w-64">
+        <input type="text" placeholder="Buscar productos..." 
+               id="searchInput" 
+               class="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
       </div>
-      
-      <!-- Botón de carrito -->
-      <button onclick="toggleCart()" class="btn btn-outline-secondary position-relative">
-        <i class="bi bi-cart" style="font-size: 1.2rem;"></i>
-        <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" style="font-size: 0.8rem;">0</span>
+
+      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors w-12 h-12">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+          </path>
+        </svg>
+        <span id="cartCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
       </button>
     </div>
-
+    
     <!-- Categorías -->
-    <div class="bg-light px-3 overflow-x-auto" style="white-space: nowrap;">
-      <div class="container d-flex gap-2 py-2">
-        <button onclick="setActiveCategory('all')" class="btn btn-sm btn-primary rounded-pill">Todas</button>
-        <button onclick="setActiveCategory('Absorbentes')" class="btn btn-sm btn-outline-primary rounded-pill">Absorbentes</button>
-        <button onclick="setActiveCategory('Servilletas')" class="btn btn-sm btn-outline-primary rounded-pill">Servilletas</button>
-        <button onclick="setActiveCategory('Palillos')" class="btn btn-sm btn-outline-primary rounded-pill">Palillos</button>
-        <button onclick="setActiveCategory('Bolsas')" class="btn btn-sm btn-outline-primary rounded-pill">Bolsas</button>
-        <button onclick="setActiveCategory('Papel térmico')" class="btn btn-sm btn-outline-primary rounded-pill">Papel térmico</button>
-        <button onclick="setActiveCategory('Vasos desechables')" class="btn btn-sm btn-outline-primary rounded-pill">Vasos</button>
-        <button onclick="setActiveCategory('Envases')" class="btn btn-sm btn-outline-primary rounded-pill">Envases</button>
-        <button onclick="setActiveCategory('Platos y termopack')" class="btn btn-sm btn-outline-primary rounded-pill">Platos</button>
-        <button onclick="setActiveCategory('Retráctil')" class="btn btn-sm btn-outline-primary rounded-pill">Retráctil</button>
-        <button onclick="setActiveCategory('Ceniceros')" class="btn btn-sm btn-outline-primary rounded-pill">Ceniceros</button>
-        <button onclick="setActiveCategory('Cristaleria')" class="btn btn-sm btn-outline-primary rounded-pill">Cristalería</button>
-        <button onclick="setActiveCategory('Tajín')" class="btn btn-sm btn-outline-primary rounded-pill">Tajín</button>
-        <button onclick="setActiveCategory('Moldes')" class="btn btn-sm btn-outline-primary rounded-pill">Moldes</button>
-        <button onclick="setActiveCategory('Abridores')" class="btn btn-sm btn-outline-primary rounded-pill">Abridores</button>
-        <button onclick="setActiveCategory('Cubiertos')" class="btn btn-sm btn-outline-primary rounded-pill">Cubiertos</button>
-        <button onclick="setActiveCategory('Otros')" class="btn btn-sm btn-outline-primary rounded-pill">Otros</button>
-        <button onclick="setActiveCategory('Venenos')" class="btn btn-sm btn-outline-primary rounded-pill">Venenos</button>
+    <div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2">
+      <div class="container mx-auto px-4">
+        <button onclick="setActiveCategory('all')" class="px-4 py-2 capitalize hover:bg-gray-200 active:bg-indigo-600 active:text-white rounded-full bg-indigo-600 text-white">all</button>
+        <button onclick="setActiveCategory('Absorbentes')" class="px-4 py-2 capitalize hover:bg-gray-200">Absorbentes</button>
+        <button onclick="setActiveCategory('Servilletas')" class="px-4 py-2 capitalize hover:bg-gray-200">Servilletas</button>
+        <button onclick="setActiveCategory('Palillos')" class="px-4 py-2 capitalize hover:bg-gray-200">Palillos</button>
+        <button onclick="setActiveCategory('Bolsas')" class="px-4 py-2 capitalize hover:bg-gray-200">Bolsas</button>
+        <button onclick="setActiveCategory('Papel térmico')" class="px-4 py-2 capitalize hover:bg-gray-200">Papel térmico</button>
+        <button onclick="setActiveCategory('Vasos desechables')" class="px-4 py-2 capitalize hover:bg-gray-200">Vasos desechables</button>
+        <button onclick="setActiveCategory('Envases')" class="px-4 py-2 capitalize hover:bg-gray-200">Envases</button>
+        <button onclick="setActiveCategory('Platos y termopack')" class="px-4 py-2 capitalize hover:bg-gray-200">Platos y termopack</button>
+        <button onclick="setActiveCategory('Retráctil')" class="px-4 py-2 capitalize hover:bg-gray-200">Retráctil</button>
+        <button onclick="setActiveCategory('Ceniceros')" class="px-4 py-2 capitalize hover:bg-gray-200">Ceniceros</button>
+        <button onclick="setActiveCategory('Cristaleria')" class="px-4 py-2 capitalize hover:bg-gray-200">Cristaleria</button>
+        <button onclick="setActiveCategory('Tajín')" class="px-4 py-2 capitalize hover:bg-gray-200">Tajín</button>
+        <button onclick="setActiveCategory('Moldes')" class="px-4 py-2 capitalize hover:bg-gray-200">Moldes</button>
+        <button onclick="setActiveCategory('Abridores')" class="px-4 py-2 capitalize hover:bg-gray-200">Abridores</button>
+        <button onclick="setActiveCategory('Cubiertos')" class="px-4 py-2 capitalize hover:bg-gray-200">Cubiertos</button>
+        <button onclick="setActiveCategory('Otros')" class="px-4 py-2 capitalize hover:bg-gray-200">Otros</button>
+        <button onclick="setActiveCategory('Venenos')" class="px-4 py-2 capitalize hover:bg-gray-200">Venenos</button>
       </div>
     </div>
   </header>
 
   <!-- Contenido principal -->
-  <main class="container my-4">
-    <h2 class="h4 mb-3">Categoría: <span id="categoryTitle" class="text-primary">Todas</span></h2>
+  <main class="container mx-auto px-4 py-8">
+    <h2 id="categoryTitle" class="text-3xl font-bold mb-6">Todos los productos</h2>
     
     <!-- Grid de productos -->
-    <div id="productsGrid" class="row g-3"></div>
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-white py-3 border-top text-center text-muted">
-    <p class="mb-0">© 2025 Gestor I94. Todos los derechos reservados.</p>
+  <footer class="bg-white mt-12 py-8 border-t">
+    <div class="container mx-auto px-4 text-center text-gray-600">
+      <p>© 2025 Gestor I94. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
   <!-- Carrito -->
-  <div id="cartSidebar" class="d-none fixed-bottom bg-white shadow-lg" style="max-width: 400px; width: 100%; z-index: 1000; height: 100vh; overflow-y: auto;">
-    <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
-      <h5 class="mb-0">Tu Carrito</h5>
-      <button onclick="toggleCart()" class="btn btn-sm btn-close"></button>
-    </div>
-    
-    <!-- Formulario de cliente -->
-    <div class="p-3">
-      <div class="mb-3">
-        <label class="form-label">Nombre completo</label>
-        <input type="text" id="customerName" class="form-control form-control-sm" placeholder="Ej: Juan Pérez">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Teléfono</label>
-        <input type="text" id="customerPhone" class="form-control form-control-sm" placeholder="Ej: 5352663106">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Opción de entrega</label>
-        <select id="deliveryOption" onchange="toggleAddressField()" class="form-select form-select-sm">
-          <option value="recogida">Recogida en tienda</option>
-          <option value="mensajeria">Mensajería</option>
-        </select>
-      </div>
-      <div id="addressField" class="mb-3 d-none">
-        <label class="form-label">Dirección de envío</label>
-        <input type="text" id="customerAddress" class="form-control form-control-sm" placeholder="Calle 123, La Habana">
-      </div>
-    </div>
-
-    <!-- Items del carrito -->
-    <div id="cartItems" class="p-3" style="max-height: 60vh; overflow-y: auto;"></div>
-
-    <!-- Resumen y botón de WhatsApp -->
-    <div id="cartSummary" class="p-3 border-top">
-      <div class="d-flex justify-content-between mb-3">
-        <strong>Total:</strong>
-        <span id="totalPrice">₱0.00</span>
-      </div>
-      <button onclick="sendToWhatsApp()" class="btn btn-success w-100 d-flex align-items-center justify-content-center">
-        <i class="bi bi-whatsapp me-2" style="font-size: 1.2rem;"></i> Enviar pedido por WhatsApp
-      </button>
-    </div>
-  </div>
-
-  <!-- Iconos de Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons @1.10.5/font/bootstrap-icons.css">
+  <div className="space-y-3 mb-4">
+  <input 
+    id="customerName" 
+    type="text" 
+    placeholder="Nombre completo" 
+    className="w-full px-3 py-2 border rounded"
+  />
+  <input 
+    id="customerPhone" 
+    type="text" 
+    placeholder="Teléfono (ej: 5352663106)" 
+    className="w-full px-3 py-2 border rounded"
+  />
+  <select id="deliveryOption" onChange={toggleAddressField} className="w-full px-3 py-2 border rounded">
+    <option value="recogida">Recogida en tienda</option>
+    <option value="mensajeria">Mensajería</option>
+  </select>
+  <input 
+    id="customerAddress" 
+    type="text" 
+    placeholder="Dirección de envío (opcional)" 
+    className="w-full px-3 py-2 border rounded hidden"
+  />
+</div>
 
   <!-- Script de la tienda -->
   <script>
-    // Datos de productos
+    // Array de productos completo
     const products = [
       // Absorbentes
-      { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: "https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
+      { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 2, name: "Absorbente plástico flexible 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 3, name: "Absorbente plástico moldeable 100 unidades", category: "Absorbentes", price: "500.00", stock: 10, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 4, name: "Absorbente para sueros y batidos 9mm ancho 100 unidades", category: "Absorbentes", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
@@ -151,19 +143,22 @@
       { id: 11, name: "Palitos para picaderas 100 unidades 10cm", category: "Palillos", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
       { id: 12, name: "Pomito de palitos de diente 150 unidades (aprox)", category: "Palillos", price: "350.00", stock: 20, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
       { id: 13, name: "Brochetas de acero inoxidable Aprox 30cm", category: "Palillos", price: "400.00", stock: 15, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 14, name: "Palitos para brochetas 15 cm 200 unidades", category: "Palillos", price: "600.00", stock: 10, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 15, name: "Palitos para brochetas 80-90u aprox 24.5cm", category: "Palillos", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
+      { id: 16, name: "Palitos chinos de madera 24cm 10 pares", category: "Palillos", price: "1000.00", stock: 8, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
       
       // Bolsas
-      { id: 14, name: "Bolsas para desechos (negras) Rollo de 25 unidades", category: "Bolsas", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 15, name: "Bolsa de asa troquelada (Papel liner) 29cm (alto) 20cm (ancho) 8cm (fuelle) 20 unidades", category: "Bolsas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 16, name: "Nylon para envasar y sellar 25x45cm 500 unidades", category: "Bolsas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 17, name: "Bolsas para desechos (negras) Rollo de 25 unidades", category: "Bolsas", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 18, name: "Bolsa de asa troquelada (Papel liner) 29cm (alto) 20cm (ancho) 8cm (fuelle) 20 unidades", category: "Bolsas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 19, name: "Nylon para envasar y sellar 25x45cm 500 unidades", category: "Bolsas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       
       // Papel térmico
-      { id: 17, name: "Rollo de papel térmico 57mm x 22m", category: "Papel térmico", price: "250.00", stock: 30, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 18, name: "Rollo de papel térmico 55x60mm", category: "Papel térmico", price: "300.00", stock: 15, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 20, name: "Rollo de papel térmico 57mm x 22m", category: "Papel térmico", price: "250.00", stock: 30, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      { id: 21, name: "Rollo de papel térmico 55x60mm", category: "Papel térmico", price: "300.00", stock: 15, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
       
       // Vasos desechables
-      { id: 19, name: "Vasos desechables para café 3onz 100 unidades", category: "Vasos desechables", price: "500.00", stock: 20, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
-      { id: 20, name: "Vasos desechables 8onz 100 unidades", category: "Vasos desechables", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      { id: 22, name: "Vasos desechables para café 3onz 100 unidades", category: "Vasos desechables", price: "500.00", stock: 20, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      { id: 23, name: "Vasos desechables 8onz 100 unidades", category: "Vasos desechables", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
       
       // Vasos con tapa
       { id: 24, name: "Vasos con tapa domo 12onz 50 unidades", category: "Vasos desechables con tapa", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
@@ -292,8 +287,6 @@
       { id: 127, name: "Rodillo de silicona Antiadherente Mango de madera Centro giratorio", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
       { id: 128, name: "Colador de espiral", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
       { id: 129, name: "Set de cocina 5 piezas", category: "Otros", price: "2300.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-
-      // Otros 2
       { id: 130, name: "Espátula para dulce", category: "Otros", price: "1800.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
       { id: 131, name: "Hielera plástica Solo para hielo, no botellas Incluye 1 pinza", category: "Otros", price: "2500.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
       { id: 132, name: "Rejilla para asar pescado", category: "Otros", price: "3000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
@@ -307,130 +300,34 @@
       { id: 138, name: "Veneno para hormigas", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 139, name: "Veneno para cucarachas 8gramos", category: "Venenos", price: "200.00", stock: 25, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 140, name: "Incienso para mosquitos Aprox 30u", category: "Venenos", price: "450.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" }
     ];
 
     let cart = [];
     let activeCategory = 'all';
     let searchQuery = '';
-    let customerInfo = { name: '', phone: '', deliveryOption: 'recogida', address: '' };
-
-    // Inicializar categorías y productos
-    function initCategories() {
-      const categories = [...new Set(products.map(p => p.category))];
-      categories.unshift('all');
-      const container = document.querySelector('.container');
-      container.innerHTML = ''; // Limpia y rellena
-      categories.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.className = `btn btn-sm ${cat === 'all' ? 'btn-primary' : 'btn-outline-primary'} rounded-pill me-2`;
-        btn.textContent = cat === 'all' ? 'Todas' : cat;
-        btn.onclick = () => setActiveCategory(cat);
-        container.appendChild(btn);
-      });
+    
+    function toggleCart() {
+      document.getElementById('cartSidebar').classList.toggle('hidden');
+      if (!document.getElementById('cartSidebar').classList.contains('hidden')) updateCart();
     }
 
     function setActiveCategory(category) {
       activeCategory = category;
-      document.getElementById('categoryTitle').textContent = (activeCategory === 'all') ? 'Todas' : activeCategory;
+      document.getElementById('categoryTitle').innerText = (activeCategory === 'all') ? 'Todos los productos' : activeCategory;
       renderProducts();
     }
 
-    function renderProducts() {
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = '';
-      
-      const filtered = products.filter(product => 
-        (activeCategory === 'all' || product.category === activeCategory) &&
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      
-      if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-12 text-center py-5"><p class="text-muted">No se encontraron productos.</p></div>`;
-        return;
-      }
-
-      filtered.forEach(product => {
-        const col = document.createElement('div');
-        col.className = 'col-6 col-sm-4 col-md-3 col-lg-3';
-
-        const card = document.createElement('div');
-        card.className = 'card h-100';
-        card.innerHTML = `
-          <img src="${product.image}" class="card-img-top" style="height: 150px; object-fit: cover;" />
-          <div class="card-body d-flex flex-column">
-            <h6 class="card-title">${product.name}</h6>
-            <p class="card-text text-primary">₱${product.price}</p>
-            <p class="card-text text-muted">${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}</p>
-            <button onclick="addToCart(${product.id})" ${product.stock <= 0 ? 'disabled' : ''} 
-                    class="btn ${product.stock > 0 ? 'btn-success btn-sm' : 'btn-secondary btn-sm disabled'} mt-auto">
-              ${product.stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
-            </button>
-          </div>
-        `;
-        col.appendChild(card);
-        grid.appendChild(col);
-      });
+    function toggleAddressField() {
+      const addressField = document.getElementById('customerAddress');
+      addressField.classList.toggle('hidden', document.getElementById('deliveryOption').value !== 'mensajeria');
     }
 
-    function toggleCart() {
-      const cartSidebar = document.getElementById('cartSidebar');
-      cartSidebar.classList.toggle('d-none');
-      if (!cartSidebar.classList.contains('d-none')) updateCart();
-    }
-
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      if (!product || product.stock <= 0) return;
-
-      const existingItem = cart.find(item => item.id === id);
-      if (existingItem) {
-        cart = cart.map(item => 
-          item.id === id ? {...item, quantity: item.quantity + 1} : item
-        );
-      } else {
-        cart.push({...product, quantity: 1});
-      }
-      updateCart();
-      showNotification(`Añadido al carrito: ${product.name}`);
-    }
-
-    function updateCart() {
-      const cartItems = document.getElementById('cartItems');
-      cartItems.innerHTML = '';
-      
-      if (cart.length === 0) {
-        cartItems.innerHTML = `<p class="text-center text-muted py-4">Tu carrito está vacío</p>`;
-        document.getElementById('cartSummary').classList.add('d-none');
-        document.getElementById('cartCount').textContent = '0';
-        document.getElementById('cartCount').classList.add('d-none');
-        return;
-      }
-
-      let totalPrice = 0;
-      cart.forEach(item => {
-        totalPrice += parseFloat(item.price) * item.quantity;
-        const row = document.createElement('div');
-        row.className = 'd-flex align-items-center mb-3';
-        row.innerHTML = `
-          <img src="${item.image}" class="rounded me-2" style="width: 60px; height: 60px; object-fit: cover;">
-          <div class="flex-grow-1">
-            <small>${item.name}</small><br>
-            <small class="text-primary">₱${item.price}</small>
-          </div>
-          <div class="d-flex align-items-center ms-2">
-            <button onclick="updateQuantity(${item.id}, -1)" class="btn btn-sm btn-outline-secondary">-</button>
-            <span class="mx-2">${item.quantity}</span>
-            <button onclick="updateQuantity(${item.id}, 1)" class="btn btn-sm btn-outline-secondary">+</button>
-          </div>
-        `;
-        cartItems.appendChild(row);
-      });
-
-      document.getElementById('totalPrice').textContent = `₱${totalPrice.toFixed(2)}`;
-      document.getElementById('cartSummary').classList.remove('d-none');
-      document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById('cartCount').classList.remove('d-none');
+    function showNotification(text) {
+      const notification = document.getElementById('notification');
+      notification.innerText = text;
+      notification.classList.remove('hidden');
+      setTimeout(() => notification.classList.add('hidden'), 3000);
     }
 
     function updateQuantity(id, delta) {
@@ -442,25 +339,22 @@
     }
 
     function sendToWhatsApp() {
+      if (cart.length === 0) return showNotification('El carrito está vacío');
       const name = document.getElementById('customerName').value.trim();
       const phone = document.getElementById('customerPhone').value.trim();
       const deliveryOption = document.getElementById('deliveryOption').value;
       const address = document.getElementById('customerAddress').value.trim();
-      
-      if (!name || !phone) {
-        showNotification('Completa tu nombre y teléfono');
-        return;
-      }
 
-      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\n`);
+      if (!name || !phone) return showNotification('Completa tu nombre y teléfono');
+
+      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}`);
       if (deliveryOption === 'mensajeria' && address) {
-        message += encodeURIComponent(`Dirección: ${address}\n`);
+        message += encodeURIComponent(`\nDirección: ${address}`);
       }
-      message += encodeURIComponent(`\nProductos:\n`);
       cart.forEach(item => {
-        message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
+        message += encodeURIComponent(`\n${item.name} - Cantidad: ${item.quantity}`);
       });
-      message += encodeURIComponent(`\nTotal: ₱${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`);
+      message += encodeURIComponent(`\nTotal: ₱${getTotalPrice().toFixed(2)}`);
 
       window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
       cart = [];
@@ -469,27 +363,113 @@
       showNotification('Pedido enviado por WhatsApp');
     }
 
-    function showNotification(text) {
-      const notification = document.getElementById('notification');
-      notification.textContent = text;
-      notification.classList.remove('d-none');
-      setTimeout(() => notification.classList.add('d-none'), 3000);
+    function getProductsByCategory(category) {
+      return products.filter(p => p.category === category);
     }
 
-    function toggleAddressField() {
-      const addressField = document.getElementById('addressField');
-      addressField.classList.toggle('d-none', document.getElementById('deliveryOption').value !== 'mensajeria');
+    function getFilteredProducts() {
+      return products.filter(p => 
+        (activeCategory === 'all' || p.category === activeCategory) && p.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
 
-    // Evento de búsqueda
+    function getTotalPrice() {
+      return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = `<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>`;
+        document.getElementById('cartSummary').classList.add('hidden');
+        document.getElementById('cartCount').classList.add('hidden');
+        return;
+      }
+
+      cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = "flex items-center border rounded-lg p-3 mb-2";
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
+          <div class="flex-grow">
+            <h4 class="font-medium">${item.name}</h4>
+            <p class="text-gray-600">₱${item.price}</p>
+          </div>
+          <div class="flex items-center">
+            <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
+            <span class="mx-2">${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+        `;
+        cartItems.appendChild(cartItem);
+      });
+
+      document.getElementById('cartSummary').classList.remove('hidden');
+      document.getElementById('cartCount').classList.remove('hidden');
+      document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      
+      const filtered = products.filter(p => 
+        (activeCategory === 'all' || p.category === activeCategory) &&
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-gray-500">No se encontraron productos</p></div>`;
+        return;
+      }
+
+      filtered.forEach(product => {
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+          <div class="p-4 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-semibold text-lg mb-1">${product.name}</h3>
+              <p class="text-gray-600 mb-2">₱${product.price}</p>
+              <p class="text-sm text-gray-500">${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}</p>
+            </div>
+            <button onclick="addToCart(${product.id})" ${product.stock <= 0 ? 'disabled' : ''} 
+                    class="mt-4 py-2 px-4 rounded-full font-medium transition-colors ${product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed' }">
+              ${product.stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      if (!product || product.stock <= 0) return;
+      
+      const existingItem = cart.find(item => item.id === id);
+      if (existingItem) {
+        cart = cart.map(item => item.id === id ? {...item, quantity: item.quantity + 1} : item);
+      } else {
+        cart.push({...product, quantity: 1});
+      }
+      updateCart();
+      showNotification(`Añadido al carrito: ${product.name}`);
+    }
+
+    function getTotalPrice() {
+      return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    }
+
+    // Inicialización
     document.getElementById('searchInput').addEventListener('input', e => {
       searchQuery = e.target.value;
       renderProducts();
     });
 
-    // Inicialización
     document.addEventListener('DOMContentLoaded', () => {
-      initCategories();
       renderProducts();
     });
   </script>
