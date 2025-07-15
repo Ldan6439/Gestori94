@@ -7,43 +7,42 @@
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com "></script>
   <style>
-    .fade-in-down {
-      animation: fadeInDown 0.3s ease-out;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .fade-in-down { animation: fadeInDown 0.3s ease-out; }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body class="bg-gray-50">
-  <!-- Hero Section con logo -->
-  <div class="relative bg-indigo-900 text-white py-10">
-    <img src="/images/logogestori94.jpg" alt="Logo Gestor I94" class="w-full h-48 object-cover opacity-30" />
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="text-center">
-        <h1 class="text-4xl font-bold mb-2">Gestor I94</h1>
-        <p class="text-xl">Desechables e Insumos</p>
-      </div>
-    </div>
+  <!-- Notificación -->
+  <div id="notification" class="hidden fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 fade-in-down"></div>
+
+  <!-- Hero Section con imagen local -->
+<div class="relative bg-indigo-900 text-white py-10">
+  <!-- Imagen local desde la carpeta images -->
+  <img 
+    src="/images/logogestori94.jpg" 
+    alt="LL89" 
+    class="w-full max-h-64 object-cover opacity-30"
+  />
+  <div class="absolute inset-0 flex items-center justify-center">
+    <h1 class="text-4xl md:text-5xl font-bold z-10">Desechables e Insumos</h1>
   </div>
+</div>
 
   <!-- Header -->
   <header class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-indigo-600">Gestor I94</h1>
-      
-      <div class="relative w-full sm:w-64">
-        <input type="text" placeholder="Buscar productos..." id="searchInput"
-               class="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      <div class="relative">
+        <input type="text" placeholder="Buscar productos..." 
+               id="searchInput" 
+               class="pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-
-      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors w-12 h-12">
+      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
         </svg>
         <span id="cartCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
@@ -51,9 +50,26 @@
     </div>
     
     <!-- Categorías -->
-    <div id="categoryList" class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2">
-      <div class="container mx-auto px-4 flex gap-2 py-2">
-        <button onclick="setActiveCategory('all')" class="category-btn px-4 py-2 bg-indigo-600 text-white rounded-full">All</button>
+    <div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2">
+      <div class="container mx-auto px-4">
+        <button onclick="setActiveCategory('all')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200 active:bg-indigo-600 active:text-white rounded-full bg-indigo-600 text-white">all</button>
+        <button onclick="setActiveCategory('Absorbentes')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Absorbentes</button>
+        <button onclick="setActiveCategory('Servilletas')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Servilletas</button>
+        <button onclick="setActiveCategory('Palillos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Palillos</button>
+        <button onclick="setActiveCategory('Bolsas')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Bolsas</button>
+        <button onclick="setActiveCategory('Papel térmico')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Papel térmico</button>
+        <button onclick="setActiveCategory('Vasos desechables')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Vasos desechables</button>
+        <button onclick="setActiveCategory('Envases')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Envases</button>
+        <button onclick="setActiveCategory('Platos y termopack')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Platos y termopack</button>
+        <button onclick="setActiveCategory('Retráctil')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Retráctil</button>
+        <button onclick="setActiveCategory('Ceniceros')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Ceniceros</button>
+        <button onclick="setActiveCategory('Cristaleria')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cristaleria</button>
+        <button onclick="setActiveCategory('Tajín')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Tajín</button>
+        <button onclick="setActiveCategory('Moldes')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Moldes</button>
+        <button onclick="setActiveCategory('Abridores')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Abridores</button>
+        <button onclick="setActiveCategory('Cubiertos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cubiertos</button>
+        <button onclick="setActiveCategory('Otros')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Otros</button>
+        <button onclick="setActiveCategory('Venenos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Venenos</button>
       </div>
     </div>
   </header>
@@ -66,11 +82,18 @@
     <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
   </main>
 
+  <!-- Footer -->
+  <footer class="bg-white mt-12 py-8 border-t">
+    <div class="container mx-auto px-4 text-center text-gray-600">
+      <p>© 2025 Gestor I94. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
   <!-- Carrito -->
   <div id="cartSidebar" class="fixed inset-0 z-50 hidden">
-    <div onclick="toggleCart()" class="fixed inset-0 bg-black bg-opacity-50"></div>
-    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4">
+    <div class="fixed inset-0 bg-black bg-opacity-50" onclick="toggleCart()"></div>
+    <div class="relative bg-white w-full max-w-md ml-auto h-full shadow-xl flex flex-col">
+      <div class="p-6 border-b flex justify-between items-center">
         <h2 class="text-xl font-bold">Tu Carrito</h2>
         <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,50 +101,30 @@
           </svg>
         </button>
       </div>
-      
-      <!-- Formulario de cliente -->
-      <div id="cartForm" class="mb-6">
-        <div class="space-y-3">
-          <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded" required />
-          <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded" required />
-          
-          <select id="deliveryOption" onchange="toggleAddressField()" class="w-full px-3 py-2 border rounded">
-            <option value="recogida">Recogida en tienda</option>
-            <option value="mensajeria">Mensajería</option>
-          </select>
-          
-          <input type="text" id="customerAddress" placeholder="Dirección de envío (opcional)" class="w-full px-3 py-2 border rounded hidden" />
-        </div>
-      </div>
-      
-      <!-- Productos en carrito -->
-      <div id="cartItems" class="mb-6"></div>
-      
-      <!-- Resumen del pedido -->
-      <div id="cartSummary" class="border-t pt-4 hidden">
+      <div id="cartItems" class="flex-grow overflow-y-auto p-6"></div>
+      <div id="cartSummary" class="border-t p-6 hidden">
         <div class="flex justify-between mb-4">
           <span class="font-bold">Total:</span>
           <span id="totalPrice" class="font-bold">₱0.00</span>
         </div>
-        
-        <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold flex items-center justify-center">
+        <div class="space-y-3 mb-4">
+          <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded" required />
+          <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded" required />
+        </div>
+        <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold transition-colors flex items-center justify-center">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.072.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-          </svg>
+        </svg>
           Enviar pedido por WhatsApp
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Notificación -->
-  <div id="notification" class="hidden fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 fade-in-down"></div>
-
   <!-- Script de la tienda -->
   <script>
-    // Productos completos (usando tus rutas de imágenes)
     const products = [
-    // Absorbentes
+      // Absorbentes
       { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " " },
       { id: 2, name: "Absorbente plástico flexible 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 3, name: "Absorbente plástico moldeable 100 unidades", category: "Absorbentes", price: "500.00", stock: 10, image: " images/Absorbente plástico moldeable.jpg" },
@@ -295,65 +298,29 @@
       { id: 139, name: "Veneno para cucarachas 8gramos", category: "Venenos", price: "200.00", stock: 25, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 140, name: "Incienso para mosquitos Aprox 30u", category: "Venenos", price: "450.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" }
-      
     ];
 
     let cart = [];
     let activeCategory = 'all';
     let searchQuery = '';
-    let allCategories = [...new Set(products.map(p => p.category))];
-
-    // Inicializar categorías
-    function initCategories() {
-      const categoryList = document.getElementById('categoryList');
-      const container = categoryList.querySelector('div');
-      
-      // Agregar categoría "All"
-      const allBtn = document.createElement('button');
-      allBtn.className = "category-btn px-4 py-2 bg-indigo-600 text-white rounded-full";
-      allBtn.textContent = "All";
-      allBtn.onclick = () => setActiveCategory('all');
-      container.appendChild(allBtn);
-      
-      // Agregar otras categorías
-      allCategories.forEach(category => {
-        const btn = document.createElement('button');
-        btn.className = "category-btn px-4 py-2 capitalize hover:bg-gray-200 rounded-full";
-        btn.textContent = category;
-        btn.onclick = () => setActiveCategory(category);
-        container.appendChild(btn);
-      });
+    
+    function toggleCart() {
+      document.getElementById('cartSidebar').classList.toggle('hidden');
     }
-
-    // Activar categoría
+    
     function setActiveCategory(category) {
       activeCategory = category;
-      document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('bg-indigo-600', 'text-white');
-        btn.classList.add('hover:bg-gray-200');
-      });
-      
-      document.querySelector(`[onclick="setActiveCategory('${category}')"]`).classList.replace('hover:bg-gray-200', 'bg-indigo-600');
-      document.querySelector(`[onclick="setActiveCategory('${category}')"]`).classList.replace('text-gray-500', 'text-white');
-      
-      document.getElementById('categoryTitle').textContent = (activeCategory === 'all') ? 'Todos los productos' : activeCategory;
+      document.getElementById('categoryTitle').innerText = (activeCategory === 'all') ? 'Todos los productos' : activeCategory;
       renderProducts();
     }
-
-    // Buscar productos
-    document.getElementById('searchInput').addEventListener('input', e => {
-      searchQuery = e.target.value.toLowerCase();
-      renderProducts();
-    });
-
-    // Renderizar productos
+    
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = '';
       
       const filtered = products.filter(product => 
-        (activeCategory === 'all' || product.category === activeCategory) && 
-        product.name.toLowerCase().includes(searchQuery)
+        (activeCategory === 'all' || product.category === activeCategory) &&
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       
       if (filtered.length === 0) {
@@ -361,51 +328,48 @@
         return;
       }
       
-      // Mostrar el primer producto de la categoría seleccionada
-      const firstProduct = filtered[0];
-      const card = document.createElement('div');
-      card.className = "bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300";
-      card.innerHTML = `
-        <img src="${firstProduct.image}" alt="${firstProduct.name}" class="w-full h-48 object-cover" />
-        <div class="p-4">
-          <h3 class="font-semibold text-lg mb-1">${firstProduct.name}</h3>
-          <p class="text-gray-600 mb-2">₱${firstProduct.price}</p>
-          <p class="text-sm text-gray-500">${firstProduct.stock > 0 ? `Stock: ${firstProduct.stock}` : 'Agotado'}</p>
-        </div>
-      `;
-      grid.appendChild(card);
+      filtered.forEach(product => {
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" />
+          <div class="p-4 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="font-semibold text-lg mb-1">${product.name}</h3>
+              <p class="text-gray-600 mb-2">₱${product.price}</p>
+              <p class="text-sm text-gray-500 mb-4">
+                ${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}
+              </p>
+            </div>
+            <button onclick="addToCart(${product.id})"
+                    ${product.stock <= 0 ? 'disabled' : ''}
+                    class="mt-4 py-2 px-4 rounded-full font-medium transition-colors ${
+                      product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }">
+              ${product.stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
     }
-
-    // Carrito
-    function toggleCart() {
-      document.getElementById('cartSidebar').classList.toggle('hidden');
-      if (!document.getElementById('cartSidebar').classList.contains('hidden')) {
-        updateCart();
-      }
-    }
-
+    
     function addToCart(id) {
       const product = products.find(p => p.id === id);
       if (!product || product.stock <= 0) return;
       
       const existingItem = cart.find(item => item.id === id);
       if (existingItem) {
-        cart = cart.map(item => item.id === id ? {...item, quantity: item.quantity + 1} : item);
+        cart = cart.map(item => 
+          item.id === id ? {...item, quantity: item.quantity + 1} : item
+        );
       } else {
         cart.push({...product, quantity: 1});
       }
       updateCart();
       showNotification(`Añadido al carrito: ${product.name}`);
     }
-
-    function updateQuantity(id, delta) {
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        item.quantity = Math.max(1, item.quantity + delta);
-        updateCart();
-      }
-    }
-
+    
     function updateCart() {
       const cartItems = document.getElementById('cartItems');
       cartItems.innerHTML = '';
@@ -416,81 +380,77 @@
         document.getElementById('cartCount').classList.add('hidden');
         return;
       }
-
+      
+      let totalPrice = 0;
       cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = "flex items-center border-b py-3";
-        cartItem.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
-          <div class="flex-grow">
-            <h4 class="font-medium">${item.name}</h4>
-            <p class="text-gray-600">₱${item.price}</p>
-          </div>
-          <div class="flex items-center">
-            <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 bg-gray-200 text-gray-700 rounded-full">-</button>
-            <span class="mx-2">${item.quantity}</span>
-            <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 bg-gray-200 text-gray-700 rounded-full">+</button>
+        totalPrice += parseFloat(item.price) * item.quantity;
+        cartItems.innerHTML += `
+          <div class="flex items-center border rounded-lg p-3 mb-2">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
+            <div class="flex-grow">
+              <h4 class="font-medium">${item.name}</h4>
+              <p class="text-gray-600">₱${item.price}</p>
+            </div>
+            <div class="flex items-center">
+              <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
+              <span class="mx-2 w-8 text-center">${item.quantity}</span>
+              <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+            </div>
           </div>
         `;
-        cartItems.appendChild(cartItem);
       });
-
-      document.getElementById('cartSummary').classList.remove('hidden');
-      document.getElementById('totalPrice').textContent = `₱${getTotalPrice()}`;
-      document.getElementById('cartCount').classList.remove('hidden');
-      document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-    }
-
-    function getTotalPrice() {
-      return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
-    }
-
-    // Toggle dirección según opción de entrega
-    function toggleAddressField() {
-      const addressField = document.getElementById('customerAddress');
-      addressField.classList.toggle('hidden', document.getElementById('deliveryOption').value !== 'mensajeria');
-    }
-
-    // Enviar por WhatsApp
-    function sendToWhatsApp() {
-      if (cart.length === 0) return showNotification('El carrito está vacío');
-      const name = document.getElementById('customerName').value.trim();
-      const phone = document.getElementById('customerPhone').value.trim();
-      if (!name || !phone) return showNotification('Completa nombre y teléfono');
       
-      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}`);
-      if (document.getElementById('deliveryOption').value === 'mensajeria') {
-        message += encodeURIComponent(`\nOpción: Mensajería\nDirección: ${document.getElementById('customerAddress').value.trim()}`);
-      } else {
-        message += encodeURIComponent('\nOpción: Recogida en tienda');
+      document.getElementById('cartSummary').classList.remove('hidden');
+      document.getElementById('totalPrice').innerText = `₱${totalPrice.toFixed(2)}`;
+      document.getElementById('cartCount').classList.toggle('hidden', cart.length === 0);
+      document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+    
+    function updateQuantity(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + delta);
+        updateCart();
+      }
+    }
+    
+    function sendToWhatsApp() {
+      const name = document.getElementById('customerName').value;
+      const phone = document.getElementById('customerPhone').value;
+      
+      if (!name || !phone) {
+        showNotification('Completa tu nombre y teléfono');
+        return;
       }
       
-      message += encodeURIComponent('\n\nProductos:');
+      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\n\nProductos:\n`);
       cart.forEach(item => {
-        message += encodeURIComponent(`\n${item.name} - Cantidad: ${item.quantity} - Precio: ₱${item.price}`);
+        message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
       });
-      message += encodeURIComponent(`\n\nTotal: ₱${getTotalPrice()}`);
+      message += encodeURIComponent(`\nTotal: ₱${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`);
       
-      window.open(`https://wa.me/5352663106?text=${message}`, '_blank');
+      window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
       cart = [];
       updateCart();
       toggleCart();
       showNotification('Pedido enviado por WhatsApp');
     }
-
-    // Notificaciones
+    
     function showNotification(text) {
       const notification = document.getElementById('notification');
-      notification.textContent = text;
+      notification.innerText = text;
       notification.classList.remove('hidden');
       setTimeout(() => notification.classList.add('hidden'), 3000);
     }
-
-    // Inicializar categorías
+    
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+    
     document.addEventListener('DOMContentLoaded', () => {
-      initCategories();
       renderProducts();
     });
   </script>
 </body>
-</html>
+          </html
