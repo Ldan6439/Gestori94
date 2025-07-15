@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestor I94</title>
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com "></script>
   <style>
-    .fade-in-down {
-      animation: fadeInDown 0.3s ease-out;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .fade-in-down { animation: fadeInDown 0.3s ease-out; }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body class="bg-gray-50">
@@ -25,7 +20,7 @@
     <div class="absolute inset-0 overflow-hidden">
       <img src="https://images.unsplash.com/photo-1588612548619-a3b2f24d96d2?auto=format&fit=crop&w=1920&q=80" 
            alt="Mercado de desechables" 
-           class="w-full h-64 object-cover opacity-30">
+           class="w-full h-64 object-cover opacity-30" />
     </div>
     <div class="container mx-auto px-4 py-16 relative">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Gestor I94</h1>
@@ -35,23 +30,20 @@
 
   <!-- Header -->
   <header class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-indigo-600">Gestor I94</h1>
-      
-      <div class="relative w-full sm:w-64">
+      <div class="relative">
         <input type="text" placeholder="Buscar productos..." 
                id="searchInput" 
-               class="w-full pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
+               class="pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" />
         <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
       </div>
-
-      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors w-12 h-12">
+      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-          </path>
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
         </svg>
         <span id="cartCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
       </button>
@@ -60,24 +52,24 @@
     <!-- Categorías -->
     <div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2">
       <div class="container mx-auto px-4">
-        <button onclick="setActiveCategory('all')" class="px-4 py-2 capitalize hover:bg-gray-200 active:bg-indigo-600 active:text-white rounded-full bg-indigo-600 text-white">all</button>
-        <button onclick="setActiveCategory('Absorbentes')" class="px-4 py-2 capitalize hover:bg-gray-200">Absorbentes</button>
-        <button onclick="setActiveCategory('Servilletas')" class="px-4 py-2 capitalize hover:bg-gray-200">Servilletas</button>
-        <button onclick="setActiveCategory('Palillos')" class="px-4 py-2 capitalize hover:bg-gray-200">Palillos</button>
-        <button onclick="setActiveCategory('Bolsas')" class="px-4 py-2 capitalize hover:bg-gray-200">Bolsas</button>
-        <button onclick="setActiveCategory('Papel térmico')" class="px-4 py-2 capitalize hover:bg-gray-200">Papel térmico</button>
-        <button onclick="setActiveCategory('Vasos desechables')" class="px-4 py-2 capitalize hover:bg-gray-200">Vasos desechables</button>
-        <button onclick="setActiveCategory('Envases')" class="px-4 py-2 capitalize hover:bg-gray-200">Envases</button>
-        <button onclick="setActiveCategory('Platos y termopack')" class="px-4 py-2 capitalize hover:bg-gray-200">Platos y termopack</button>
-        <button onclick="setActiveCategory('Retráctil')" class="px-4 py-2 capitalize hover:bg-gray-200">Retráctil</button>
-        <button onclick="setActiveCategory('Ceniceros')" class="px-4 py-2 capitalize hover:bg-gray-200">Ceniceros</button>
-        <button onclick="setActiveCategory('Cristaleria')" class="px-4 py-2 capitalize hover:bg-gray-200">Cristaleria</button>
-        <button onclick="setActiveCategory('Tajín')" class="px-4 py-2 capitalize hover:bg-gray-200">Tajín</button>
-        <button onclick="setActiveCategory('Moldes')" class="px-4 py-2 capitalize hover:bg-gray-200">Moldes</button>
-        <button onclick="setActiveCategory('Abridores')" class="px-4 py-2 capitalize hover:bg-gray-200">Abridores</button>
-        <button onclick="setActiveCategory('Cubiertos')" class="px-4 py-2 capitalize hover:bg-gray-200">Cubiertos</button>
-        <button onclick="setActiveCategory('Otros')" class="px-4 py-2 capitalize hover:bg-gray-200">Otros</button>
-        <button onclick="setActiveCategory('Venenos')" class="px-4 py-2 capitalize hover:bg-gray-200">Venenos</button>
+        <button onclick="setActiveCategory('all')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200 active:bg-indigo-600 active:text-white rounded-full bg-indigo-600 text-white">all</button>
+        <button onclick="setActiveCategory('Absorbentes')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Absorbentes</button>
+        <button onclick="setActiveCategory('Servilletas')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Servilletas</button>
+        <button onclick="setActiveCategory('Palillos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Palillos</button>
+        <button onclick="setActiveCategory('Bolsas')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Bolsas</button>
+        <button onclick="setActiveCategory('Papel térmico')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Papel térmico</button>
+        <button onclick="setActiveCategory('Vasos desechables')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Vasos desechables</button>
+        <button onclick="setActiveCategory('Envases')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Envases</button>
+        <button onclick="setActiveCategory('Platos y termopack')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Platos y termopack</button>
+        <button onclick="setActiveCategory('Retráctil')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Retráctil</button>
+        <button onclick="setActiveCategory('Ceniceros')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Ceniceros</button>
+        <button onclick="setActiveCategory('Cristaleria')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cristaleria</button>
+        <button onclick="setActiveCategory('Tajín')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Tajín</button>
+        <button onclick="setActiveCategory('Moldes')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Moldes</button>
+        <button onclick="setActiveCategory('Abridores')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Abridores</button>
+        <button onclick="setActiveCategory('Cubiertos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cubiertos</button>
+        <button onclick="setActiveCategory('Otros')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Otros</button>
+        <button onclick="setActiveCategory('Venenos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Venenos</button>
       </div>
     </div>
   </header>
@@ -99,7 +91,7 @@
 
   <!-- Carrito -->
   <div id="cartSidebar" class="fixed inset-0 z-50 hidden">
-    <div onclick="toggleCart()" class="fixed inset-0 bg-black bg-opacity-50"></div>
+    <div class="fixed inset-0 bg-black bg-opacity-50" onclick="toggleCart()"></div>
     <div class="relative bg-white w-full max-w-md ml-auto h-full shadow-xl flex flex-col">
       <div class="p-6 border-b flex justify-between items-center">
         <h2 class="text-xl font-bold">Tu Carrito</h2>
@@ -111,27 +103,18 @@
       </div>
       <div id="cartItems" class="flex-grow overflow-y-auto p-6"></div>
       <div id="cartSummary" class="border-t p-6 hidden">
-        <div class="space-y-3 mb-4">
-          <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded">
-          <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded">
-          
-          <select id="deliveryOption" class="w-full px-3 py-2 border rounded" onchange="toggleAddressField()">
-            <option value="recogida">Recogida en tienda</option>
-            <option value="mensajeria">Mensajería</option>
-          </select>
-          
-          <input type="text" id="customerAddress" placeholder="Dirección de envío (opcional)" class="w-full px-3 py-2 border rounded hidden">
-        </div>
-
         <div class="flex justify-between mb-4">
           <span class="font-bold">Total:</span>
           <span id="totalPrice" class="font-bold">₱0.00</span>
         </div>
-
-        <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold flex items-center justify-center">
+        <div class="space-y-3 mb-4">
+          <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded" required />
+          <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded" required />
+        </div>
+        <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold transition-colors flex items-center justify-center">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.072.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-          </svg>
+        </svg>
           Enviar pedido por WhatsApp
         </button>
       </div>
@@ -140,7 +123,6 @@
 
   <!-- Script de la tienda -->
   <script>
-    // Array de productos completo
     const products = [
       // Absorbentes
       { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "Absorbentes", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
@@ -148,49 +130,51 @@
       { id: 3, name: "Absorbente plástico moldeable 100 unidades", category: "Absorbentes", price: "500.00", stock: 10, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 4, name: "Absorbente para sueros y batidos 9mm ancho 100 unidades", category: "Absorbentes", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 5, name: "Absorbentes clásicos finos 500 unidades 5mm", category: "Absorbentes", price: "1100.00", stock: 8, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
-
+      
       // Servilletas
       { id: 6, name: "Servilleta la excelencia 30x30cm 100 hojas doble", category: "Servilletas", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
       { id: 7, name: "Servilletas prosa 40x40cm 40 hojas doble", category: "Servilletas", price: "500.00", stock: 12, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
       { id: 8, name: "Servilletas prosito 100 hojas simples 30x33cm", category: "Servilletas", price: "500.00", stock: 20, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
-
+      
       // Palillos
       { id: 9, name: "Púas para cócteles Acero inoxidable", category: "Palillos", price: "200.00", stock: 15, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
       { id: 10, name: "Paquete de palillos 230 unidades (aprox)", category: "Palillos", price: "300.00", stock: 25, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
       
-      // Completa con el resto de tus productos...
+      // Bolsas
+      { id: 13, name: "Bolsas para desechos (negras) Rollo de 25 unidades", category: "Bolsas", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Papel térmico
+      { id: 16, name: "Rollo de papel térmico 57mm x 22m", category: "Papel térmico", price: "250.00", stock: 30, image: " https://images.unsplash.com/photo-1582053433975-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+      
+      // Vasos desechables
+      { id: 18, name: "Vasos desechables para café 3onz 100 unidades", category: "Vasos desechables", price: "500.00", stock: 20, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
+      
+      // Ceniceros
+      { id: 26, name: "Cenicero de cristal clásico 10.5cm", category: "Ceniceros", price: "800.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Cristaleria
+      { id: 28, name: "Jarra de cristal para batido Viene con su absorbente 500ml~16onz", category: "Cristaleria", price: "1000.00", stock: 8, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
+      
+      // Venenos
+      { id: 40, name: "Veneno para moscas 100 uni", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
+      // Agrega todas tus categorías y productos aquí...
     ];
 
     let cart = [];
     let activeCategory = 'all';
     let searchQuery = '';
     
-    // Funciones principales
     function toggleCart() {
       document.getElementById('cartSidebar').classList.toggle('hidden');
-      if (!document.getElementById('cartSidebar').classList.contains('hidden')) {
-        updateCart();
-      }
     }
-
+    
     function setActiveCategory(category) {
       activeCategory = category;
       document.getElementById('categoryTitle').innerText = (activeCategory === 'all') ? 'Todos los productos' : activeCategory;
       renderProducts();
     }
-
-    function toggleAddressField() {
-      const addressField = document.getElementById('customerAddress');
-      addressField.classList.toggle('hidden', document.getElementById('deliveryOption').value !== 'mensajeria');
-    }
-
-    function showNotification(text) {
-      const notification = document.getElementById('notification');
-      notification.innerText = text;
-      notification.classList.remove('hidden');
-      setTimeout(() => notification.classList.add('hidden'), 3000);
-    }
-
+    
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = '';
@@ -204,19 +188,22 @@
         grid.innerHTML = `<div class="col-span-full text-center py-12"><p class="text-gray-500 text-xl">No se encontraron productos.</p></div>`;
         return;
       }
-
+      
       filtered.forEach(product => {
         const card = document.createElement('div');
         card.className = "bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col";
         card.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+          <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" />
           <div class="p-4 flex-grow flex flex-col justify-between">
             <div>
               <h3 class="font-semibold text-lg mb-1">${product.name}</h3>
               <p class="text-gray-600 mb-2">₱${product.price}</p>
-              <p class="text-sm text-gray-500 mb-4">${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}</p>
+              <p class="text-sm text-gray-500 mb-4">
+                ${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}
+              </p>
             </div>
-            <button onclick="addToCart(${product.id})" ${product.stock <= 0 ? 'disabled' : ''} 
+            <button onclick="addToCart(${product.id})"
+                    ${product.stock <= 0 ? 'disabled' : ''}
                     class="mt-4 py-2 px-4 rounded-full font-medium transition-colors ${
                       product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                     }">
@@ -227,11 +214,11 @@
         grid.appendChild(card);
       });
     }
-
+    
     function addToCart(id) {
       const product = products.find(p => p.id === id);
       if (!product || product.stock <= 0) return;
-
+      
       const existingItem = cart.find(item => item.id === id);
       if (existingItem) {
         cart = cart.map(item => 
@@ -243,7 +230,7 @@
       updateCart();
       showNotification(`Añadido al carrito: ${product.name}`);
     }
-
+    
     function updateCart() {
       const cartItems = document.getElementById('cartItems');
       cartItems.innerHTML = '';
@@ -254,33 +241,32 @@
         document.getElementById('cartCount').classList.add('hidden');
         return;
       }
-
+      
       let totalPrice = 0;
       cart.forEach(item => {
         totalPrice += parseFloat(item.price) * item.quantity;
-        const cartItem = document.createElement('div');
-        cartItem.className = "flex items-center border rounded-lg p-3 mb-2";
-        cartItem.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4">
-          <div class="flex-grow">
-            <h4 class="font-medium">${item.name}</h4>
-            <p class="text-gray-600">₱${item.price}</p>
-          </div>
-          <div class="flex items-center">
-            <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
-            <span class="mx-2 w-8 text-center">${item.quantity}</span>
-            <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+        cartItems.innerHTML += `
+          <div class="flex items-center border rounded-lg p-3 mb-2">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
+            <div class="flex-grow">
+              <h4 class="font-medium">${item.name}</h4>
+              <p class="text-gray-600">₱${item.price}</p>
+            </div>
+            <div class="flex items-center">
+              <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
+              <span class="mx-2 w-8 text-center">${item.quantity}</span>
+              <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+            </div>
           </div>
         `;
-        cartItems.appendChild(cartItem);
       });
-
+      
       document.getElementById('cartSummary').classList.remove('hidden');
       document.getElementById('totalPrice').innerText = `₱${totalPrice.toFixed(2)}`;
       document.getElementById('cartCount').classList.toggle('hidden', cart.length === 0);
       document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
     }
-
+    
     function updateQuantity(id, delta) {
       const item = cart.find(i => i.id === id);
       if (item) {
@@ -288,30 +274,20 @@
         updateCart();
       }
     }
-
+    
     function sendToWhatsApp() {
       const name = document.getElementById('customerName').value;
       const phone = document.getElementById('customerPhone').value;
-      const deliveryOption = document.getElementById('deliveryOption').value;
-      const address = document.getElementById('customerAddress').value;
       
       if (!name || !phone) {
         showNotification('Completa tu nombre y teléfono');
         return;
       }
-
-      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\nOpción: ${deliveryOption === 'recogida' ? 'Recogida en tienda' : 'Mensajería'}\n`);
       
-      if (deliveryOption === 'mensajeria' && address) {
-        message += encodeURIComponent(`Dirección: ${address}\n\n`);
-      } else {
-        message += encodeURIComponent(`\n`);
-      }
-
+      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\n\nProductos:\n`);
       cart.forEach(item => {
         message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
       });
-      
       message += encodeURIComponent(`\nTotal: ₱${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`);
       
       window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
@@ -320,17 +296,22 @@
       toggleCart();
       showNotification('Pedido enviado por WhatsApp');
     }
-
-    // Event listeners
+    
+    function showNotification(text) {
+      const notification = document.getElementById('notification');
+      notification.innerText = text;
+      notification.classList.remove('hidden');
+      setTimeout(() => notification.classList.add('hidden'), 3000);
+    }
+    
     document.getElementById('searchInput').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderProducts();
     });
-
-    // Inicialización
+    
     document.addEventListener('DOMContentLoaded', () => {
       renderProducts();
     });
   </script>
 </body>
-</html>
+</html>u
