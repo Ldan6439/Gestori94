@@ -39,13 +39,23 @@
         </svg>
       </div>
 
-      <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors w-12 h-12">
-        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-          </path>
-        </svg>
-        <span id="cartCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+      <button onclick="addToCart(1)" class="add-to-cart-btn">Agregar al carrito
+      let cart = [];
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product || product.stock <= 0) return;
+
+  const existingItem = cart.find(item => item.id === productId);
+  if (existingItem) {
+    cart = cart.map(item => 
+      item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+    );
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+  updateCart();
+  showNotification(`Añadido al carrito: ${product.name}`);
+}
       </button>
     </div>
     
@@ -296,6 +306,31 @@
       { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" }
     ];
 
+    function updateCart() {
+  const cartItems = document.getElementById('cartItems');
+  cartItems.innerHTML = '';
+  
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<p>Tu carrito está vacío</p>';
+  } else {
+    cart.forEach(item => {
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
+      cartItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" />
+        <span>${item.name} - Cantidad: ${item.quantity}</span>
+      `;
+      cartItems.appendChild(cartItem);
+    });
+  }
+}
+
+function showNotification(text) {
+  const notification = document.getElementById('notification');
+  notification.innerText = text;
+  notification.classList.remove('hidden');
+  setTimeout(() => notification.classList.add('hidden'), 3000);
+}
     let cart = [];
     let activeCategory = 'all';
     let searchQuery = '';
