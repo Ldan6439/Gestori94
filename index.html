@@ -420,7 +420,7 @@
       cartItems.innerHTML = '';
       
       if (cart.length === 0) {
-        cartItems.innerHTML = `<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>`;
+        cartItems.innerHTML = `<p class="text-red-500 text-2xl font-bold text-center py-8">Tu carrito está vacío</p>`;
         document.getElementById('cartSummary').classList.add('hidden');
         document.getElementById('cartCount').classList.add('hidden');
         return;
