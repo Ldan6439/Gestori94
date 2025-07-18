@@ -416,40 +416,38 @@
     }
     
     function updateCart() {
-      const cartItems = document.getElementById('cartItems');
-      cartItems.innerHTML = '';
-      
-      if (cart.length === 0) {
-        cartItems.innerHTML = `<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>`;
-        document.getElementById('cartSummary').classList.add('hidden');
-        document.getElementById('cartCount').classList.add('hidden');
-        return;
-      }
-      
-      let totalPrice = 0;
-      cart.forEach(item => {
-        totalPrice += parseFloat(item.price) * item.quantity;
-        cartItems.innerHTML += `
-          <div class="flex items-center border rounded-lg p-3 mb-2">
-            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
-            <div class="flex-grow">
-              <h4 class="font-medium">${item.name}</h4>
-              <p class="text-gray-600">₱${item.price}</p>
-            </div>
-            <div class="flex items-center">
-              <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
-              <span class="mx-2 w-8 text-center">${item.quantity}</span>
-              <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
-            </div>
-          </div>
-        `;
-      });
-      
-      document.getElementById('cartSummary').classList.remove('hidden');
-      document.getElementById('totalPrice').innerText = `₱${totalPrice.toFixed(2)}`;
-      document.getElementById('cartCount').classList.toggle('hidden', cart.length === 0);
-      document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
-    }
+  const cartItems = document.getElementById('cartItems');
+  cartItems.innerHTML = '';
+  
+  if (cart.length === 0) {
+    cartItems.innerHTML = `<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>`;
+    document.getElementById('cartSummary').classList.add('hidden');
+    document.getElementById('cartCount').classList.add('hidden');
+    return;
+  }
+
+  cart.forEach(item => {
+    const cartItem = document.createElement('div');
+    cartItem.className = "flex items-center border-b py-3";
+    cartItem.innerHTML = `
+  <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
+  <div class="flex-grow">
+    <h4 class="font-medium">${item.name}</h4>
+    <p class="text-gray-600">₱${item.price}</p>
+  </div>
+  <div class="flex items-center">
+    <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
+    <span class="mx-2 w-8 text-center">${item.quantity}</span>
+    <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+  </div>
+`;
+    cartItems.appendChild(cartItem);
+  });
+
+  document.getElementById('cartCount').classList.toggle('hidden', cart.length === 0);
+  document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById('totalPrice').innerText = `₱${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`;
+}
     
     function updateQuantity(id, delta) {
        const item = cart.find(i => i.id === id);
