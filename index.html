@@ -386,13 +386,13 @@
                 ${product.stock > 0 ? `Stock: ${product.stock}` : 'Agotado'}
               </p>
             </div>
-            <button onclick="addToCart(${product.id})"
-                    ${product.stock <= 0 ? 'disabled' : ''}
-                    class="mt-4 py-2 px-4 rounded-full font-medium transition-colors ${
-                      product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    }">
-              ${product.stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
-            </button>
+            <!-- Botón de producto -->
+<button onclick="addToCart(${product.id})" 
+        ${product.stock <= 0 ? 'disabled' : ''} 
+        class="mt-4 py-2 px-4 rounded-full font-medium transition-colors 
+        ${product.stock > 0 ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-red-500 text-white cursor-not-allowed'}">
+  ${product.stock > 0 ? 'Agregar al carrito' : 'Agotado'}
+</button>
           </div>
         `;
         grid.appendChild(card);
