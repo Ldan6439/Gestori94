@@ -452,15 +452,12 @@
     }
     
     function updateQuantity(id, delta) {
-    const updateQuantity = (id, quantity) => {
-  if (quantity <= 0) {
-    setCart(cart.filter((item) => item.id !== id));
-  } else {
-    setCart(
-      cart.map((item) => (item.id === id ? { ...item, quantity } : item))
-    );
-  }
-};
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity = Math.max(1, item.quantity + delta);
+        updateCart();
+      }
+    }
     
     function sendToWhatsApp() {
       const name = document.getElementById('customerName').value;
