@@ -437,8 +437,8 @@
   </div>
   <div class="flex items-center">
     <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
-    <span class="mx-2 w-8 text-center">${item.quantity}</span>
-    <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+        <span class="mx-2 w-8 text-center">${item.quantity || 1}</span>
+        <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
   </div>
 `;
     cartItems.appendChild(cartItem);
