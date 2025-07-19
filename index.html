@@ -115,6 +115,7 @@
         <button onclick="setActiveCategory('Abridores')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Abridores</button>
         <button onclick="setActiveCategory('Cubiertos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cubiertos</button>
         <button onclick="setActiveCategory('Otros')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Otros</button>
+        <button onclick="setActiveCategory('Otros 2')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Otros 2</button>
         <button onclick="setActiveCategory('Venenos')" class="px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Venenos</button>
       </div>
     </div>
@@ -294,62 +295,494 @@
       { id: 87, name: "Set de cuchillos 5 piezas", category: "Cubiertos", price: "4000.00", stock: 5, image: " images/IMG_20250718_191659.jpg" },
       
       // Otros
-      { id: 88, name: "Frazada de piso", category: "Otros", price: "250.00", stock: 15, image: " https://images.unsplash.com/photo-1588612548619-a3b2f24d96d2?auto=format&fit=crop&w=300&q=80" },
-      { id: 89, name: "Esponjas multiusos 10 unidades", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1588612548619-a3b2f24d96d2?auto=format&fit=crop&w=300&q=80" },
-      { id: 90, name: "Mini soporte para tacos", category: "Otros", price: "600.00", stock: 20, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 91, name: "Set de limpieza 2 estropajos 2 esponjas 1 portaestropajos", category: "Otros", price: "600.00", stock: 20, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 92, name: "Cortador de papa", category: "Otros", price: "650.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 93, name: "Pinza media luna 29cm aprox Acero inoxidable", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 94, name: "Pinza de acero inoxidable 28.5 cm alto", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 95, name: "Tamiz de polvo Colador de filtro fino", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 96, name: "Servilletero Acero inoxidable", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 97, name: "Rebanador de papa", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 98, name: "Aplastador de papa", category: "Otros", price: "800.00", stock: 12, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 99, name: "Salsa para michelada 320 ml", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 100, name: "Paquete de ligas 170-180 unidades", category: "Otros", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 101, name: "Servilletero para exteriores Acero inoxidable Ideal para lugares abiertos o con mucho aire Su presilla no permite que las servilletas se vuelen", category: "Otros", price: "900.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 102, name: "Precinta transparente (Scotch Tape) Medidas: 5cm (ancho)×11cm (diámetro)×1.5cm (grosor) 100metros", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 103, name: "Cesta tejida para pan (plástica) 23cm×13cm(base)×9cm(alto)", category: "Otros", price: "1000.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 104, name: "Juego de embudos de 3 piezas", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 105, name: "Exprimidor de naranja", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 106, name: "Palas plásticas multiusos 3 unidades", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 107, name: "Set de 3 pinzas multiusos Medidas: -28cm -22cm -18cm", category: "Otros", price: "1000.00", stock: 15, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 108, name: "Manga inyectora plástica Se utiliza para el relleno y decoración de dulces 8 boquillas", category: "Otros", price: "1100.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 109, name: "Rollo de pegatina para precios 2000 pegatinas", category: "Otros", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 110, name: "Soporte para tacos Acero inoxidable", category: "Otros", price: "1200.00", stock: 10, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 111, name: "Set de repostería (con brocha)", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 112, name: "Set de repostería Boquillas más grandes", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 113, name: "Rallador", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 114, name: "Cepillo y recogedor manual Colores disponibles Azul Verde Rosa", category: "Otros", price: "1300.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 115, name: "Espumadera para freir (Escurridor de grasa)", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 116, name: "Capacillos para cupcake 1000 unidades", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 117, name: "Salsa picante tabasco 60 ml", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 118, name: "Deshidratados ✓ Durabilidad de 6 meses a 1 año ✓ Conserva las propiedades ✓ Ideal para decorar cócteles, postres y guarniciones ✓ 25 gr equivale a 100 gr de fruta fresca DISPONIBLES •Coco:350gr Limon: 150gr", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 119, name: "Set de coladores 3 piezas", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 120, name: "Pala para hielo Acero inoxidable", category: "Otros", price: "1500.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 121, name: "Afilador manual para cuchillos", category: "Otros", price: "1600.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 122, name: "Triturador de ajo Acero inoxidable", category: "Otros", price: "1700.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 123, name: "Cuchillos BBQ 42 cm", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 124, name: "Dispensadores para salsas 2 unidades", category: "Otros", price: "1800.00", stock: 8, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 125, name: "Tenedor para BBQ 38.6x3.8cm Mango de madera", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 126, name: "Rodillo de acero inoxidable Mango de madera Centro giratorio", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 127, name: "Rodillo de silicona Antiadherente Mango de madera Centro giratorio", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 128, name: "Colador de espiral", category: "Otros", price: "2000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 129, name: "Set de cocina 5 piezas", category: "Otros", price: "2300.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 130, name: "Espátula para dulce", category: "Otros", price: "1800.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 131, name: "Hielera plástica Solo para hielo, no botellas Incluye 1 pinza", category: "Otros", price: "2500.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 132, name: "Rejilla para asar pescado", category: "Otros", price: "3000.00", stock: 5, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 133, name: "Set de 3 piezas BBQ Tenedor Pinza Espátula", category: "Otros", price: "3500.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 134, name: "Sombrillitas desechables 100 unidades", category: "Otros", price: "4000.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 135, name: "Cesto para basura de 50L Color disponible: Carmelita", category: "Otros", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
-      { id: 136, name: "Cesto para basura de 50L", category: "Otros", price: "8000.00", stock: 3, image: " https://images.unsplash.com/photo-1590410148610-30159e0cfcf7?auto=format&fit=crop&w=300&q=80" },
+  { id: 88,
+    name: "Frazada de piso",
+    category: "Otros",
+    price: "250.00",
+    stock: 10,
+    image: "/images/O1.jpg"
+  },
+  {
+    id: 89,
+    name: "Esponjas multiusos 10 unidades",
+    category: "Otros",
+    price: "0.00",
+    stock: 0,
+    image: "/images/O2.jpg"
+  },
+  {
+    id: 90,
+    name: "Mini soporte para tacos",
+    category: "Otros",
+    price: "600.00",
+    stock: 20,
+    image: "/images/O3.jpg"
+  },
+  {
+    id: 91,
+    name: "Set de limpieza 2 estropajos 2 esponjas 1 portaestropajos",
+    category: "Otros",
+    price: "600.00",
+    stock: 15,
+    image: "/images/O4.jpg"
+  },
+  {
+    id: 92,
+    name: "Cortador de papa",
+    category: "Otros",
+    price: "650.00",
+    stock: 12,
+    image: "/images/O5.jpg"
+  },
+  {
+    id: 93,
+    name: "Pinza media luna 29cm aprox Acero inoxidable",
+    category: "Otros",
+    price: "0.00",
+    stock: 0,
+    image: "/images/O6.jpg"
+  },
+  {
+    id: 94,
+    name: "Pinza de acero inoxidable 28.5 cm alto",
+    category: "Otros",
+    price: "0.00",
+    stock: 0,
+    image: "/images/O7.jpg"
+  },
+  {
+    id: 95,
+    name: "Tamiz de polvo Colador de filtro fino",
+    category: "Otros",
+    price: "800.00",
+    stock: 8,
+    image: "/images/O8.jpg"
+  },
+  {
+    id: 96,
+    name: "Servilletero Acero inoxidable",
+    category: "Otros",
+    price: "800.00",
+    stock: 8,
+    image: "/images/O9.jpg"
+  },
+  {
+    id: 97,
+    name: "Rebanador de papa",
+    category: "Otros",
+    price: "800.00",
+    stock: 10,
+    image: "/images/O10.jpg"
+  },
+  {
+    id: 98,
+    name: "Aplastador de papa",
+    category: "Otros",
+    price: "800.00",
+    stock: 10,
+    image: "/images/O11.jpg"
+  },
+  {
+    id: 99,
+    name: "Salsa para michelada 320 ml",
+    category: "Otros",
+    price: "850.00",
+    stock: 12,
+    image: "/images/O12.jpg"
+  },
+  {
+    id: 100,
+    name: "Paquete de ligas 170-180 unidades",
+    category: "Otros",
+    price: "900.00",
+    stock: 15,
+    image: "/images/O13.jpg"
+  },
+  {
+    id: 101,
+    name: "Servilletero para exteriores Acero inoxidable Ideal para lugares abiertos o con mucho aire Su presilla no permite que las servilletas se vuelen",
+    category: "Otros",
+    price: "900.00",
+    stock: 10,
+    image: "/images/O14.jpg"
+  },
+  {
+    id: 102,
+    name: "Precinta transparente (Scotch Tape) Medidas: 5cm (ancho)×11cm (diámetro)×1.5cm (grosor) 100metros",
+    category: "Otros",
+    price: "1000.00",
+    stock: 15,
+    image: "/images/O15.jpg"
+  },
+  {
+    id: 103,
+    name: "Cesta tejida para pan (plástica) 23cm×13cm(base)×9cm(alto)",
+    category: "Otros",
+    price: "1000.00",
+    stock: 10,
+    image: "/images/O16.jpg"
+  },
+  {
+    id: 104,
+    name: "Juego de embudos de 3 piezas",
+    category: "Otros",
+    price: "1000.00",
+    stock: 15,
+    image: "/images/O17.jpg"
+  },
+  {
+    id: 105,
+    name: "Exprimidor de naranja",
+    category: "Otros",
+    price: "1000.00",
+    stock: 15,
+    image: "/images/O18.jpg"
+  },
+  {
+    id: 106,
+    name: "Palas plásticas multiusos 3 unidades",
+    category: "Otros",
+    price: "1000.00",
+    stock: 15,
+    image: "/images/O19.jpg"
+  },
+  {
+    id: 107,
+    name: "Set de 3 pinzas multiusos Medidas: -28cm -22cm -18cm",
+    category: "Otros",
+    price: "1000.00",
+    stock: 15,
+    image: "/images/O20.jpg"
+  },
+  {
+    id: 108,
+    name: "Manga inyectora plástica Se utiliza para el relleno y decoración de dulces 8 boquillas",
+    category: "Otros",
+    price: "1100.00",
+    stock: 10,
+    image: "/images/O21.jpg"
+  },
+  {
+    id: 109,
+    name: "Rollo de pegatina para precios 2000 pegatinas",
+    category: "Otros",
+    price: "1200.00",
+    stock: 10,
+    image: "/images/O22.jpg"
+  },
+  {
+    id: 110,
+    name: "Soporte para tacos Acero inoxidable",
+    category: "Otros",
+    price: "1200.00",
+    stock: 10,
+    image: "/images/O23.jpg"
+  },
+  {
+    id: 111,
+    name: "Set de repostería (con brocha)",
+    category: "Otros",
+    price: "1300.00",
+    stock: 8,
+    image: "/images/O24.jpg"
+  },
+  {
+    id: 112,
+    name: "Set de repostería Boquillas más grandes",
+    category: "Otros",
+    price: "1300.00",
+    stock: 8,
+    image: "/images/O25.jpg"
+  },
+  {
+    id: 113,
+    name: "Rallador",
+    category: "Otros",
+    price: "1300.00",
+    stock: 8,
+    image: "/images/O26.jpg"
+  },
+  {
+    id: 114,
+    name: "Cepillo y recogedor manual Colores disponibles Azul Verde Rosa",
+    category: "Otros",
+    price: "1300.00",
+    stock: 8,
+    image: "/images/O27.jpg"
+  },
+  {
+    id: 115,
+    name: "Espumadera para freir (Escurridor de grasa)",
+    category: "Otros",
+    price: "1500.00",
+    stock: 8,
+    image: "/images/O28.jpg"
+  },
+  {
+    id: 116,
+    name: "Capacillos para cupcake 1000 unidades",
+    category: "Otros",
+    price: "1500.00",
+    stock: 8,
+    image: "/images/O29.jpg"
+  },
+  {
+    id: 117,
+    name: "Salsa picante tabasco 60 ml",
+    category: "Otros",
+    price: "1500.00",
+    stock: 8,
+    image: "/images/O30.jpg"
+  },
+  {
+    id: 118,
+    name: "Deshidratados ✓ Durabilidad de 6 meses a 1 año ✓ Conserva las propiedades ✓ Ideal para decorar cócteles, postres y guarniciones ✓ 25 gr equivale a 100 gr de fruta fresca DISPONIBLES •Coco:350gr Limon: 150gr",
+    category: "Otros",
+    price: "1500.00",
+    stock: 8,
+    image: "/images/O31.jpg"
+  },
+  {
+    id: 119,
+    name: "Set de coladores 3 piezas",
+    category: "Otros",
+    price: "1500.00",
+    stock: 8,
+    image: "/images/O32.jpg"
+  },
+  {
+    id: 120,
+    name: "Pala para hielo Acero inoxidable",
+    category: "Otros",
+    price: "1500.00",
+    stock: 8,
+    image: "/images/O33.jpg"
+  },
+  {
+    id: 121,
+    name: "Afilador manual para cuchillos",
+    category: "Otros",
+    price: "1600.00",
+    stock: 8,
+    image: "/images/O34.jpg"
+  },
+  {
+    id: 122,
+    name: "Triturador de ajo Acero inoxidable",
+    category: "Otros",
+    price: "1700.00",
+    stock: 8,
+    image: "/images/O35.jpg"
+  },
+  {
+    id: 123,
+    name: "Cuchillos BBQ 42 cm",
+    category: "Otros",
+    price: "0.00",
+    stock: 0,
+    image: "/images/O36.jpg"
+  },
+  {
+    id: 124,
+    name: "Dispensadores para salsas 2 unidades",
+    category: "Otros",
+    price: "1800.00",
+    stock: 10,
+    image: "/images/O37.jpg"
+  },
+  {
+    id: 125,
+    name: "Tenedor para BBQ 38.6x3.8cm Mango de madera",
+    category: "Otros",
+    price: "2000.00",
+    stock: 5,
+    image: "/images/O38.jpg"
+  },
+  {
+    id: 126,
+    name: "Rodillo de acero inoxidable Mango de madera Centro giratorio",
+    category: "Otros",
+    price: "0.00",
+    stock: 0,
+    image: "/images/O39.jpg"
+  },
+  {
+    id: 127,
+    name: "Rodillo de silicona Antiadherente Mango de madera Centro giratorio",
+    category: "Otros",
+    price: "2000.00",
+    stock: 5,
+    image: "/images/O40.jpg"
+  },
+  {
+    id: 128,
+    name: "Colador de espiral",
+    category: "Otros",
+    price: "2000.00",
+    stock: 5,
+    image: "/images/O41.jpg"
+  },
+  {
+    id: 129,
+    name: "Set de cocina 5 piezas",
+    category: "Otros",
+    price: "2300.00",
+    stock: 3,
+    image: "/images/O42.jpg"
+  },
+  {
+    id: 130,
+    name: "Espátula para dulce",
+    category: "Otros",
+    price: "1800.00",
+    stock: 5,
+    image: "/images/O43.jpg"
+  },
+  {
+    id: 131,
+    name: "Hielera plástica Solo para hielo, no botellas Incluye 1 pinza",
+    category: "Otros",
+    price: "2500.00",
+    stock: 3,
+    image: "/images/O44.jpg"
+  },
+  {
+    id: 132,
+    name: "Rejilla para asar pescado",
+    category: "Otros",
+    price: "3000.00",
+    stock: 5,
+    image: "/images/O45.jpg"
+  },
+  {
+    id: 133,
+    name: "Set de 3 piezas BBQ Tenedor Pinza Espátula",
+    category: "Otros",
+    price: "3500.00",
+    stock: 3,
+    image: "/images/O46.jpg"
+  },
+  {
+    id: 134,
+    name: "Sombrillitas desechables 100 unidades",
+    category: "Otros",
+    price: "4000.00",
+    stock: 3,
+    image: "/images/O47.jpg"
+  },
+  {
+    id: 135,
+    name: "Cesto para basura de 50L Color disponible: Carmelita",
+    category: "Otros",
+    price: "0.00",
+    stock: 0,
+    image: "/images/O48.jpg"
+  },
+  {
+    id: 136,
+    name: "Cesto para basura de 50L",
+    category: "Otros",
+    price: "8000.00",
+    stock: 3,
+    image: "/images/O49.jpg"
+  },
+
+      // Otros 2
+  {
+    id: 137,
+    name: "Paños para cocina 5 unidades Súper absorbentes",
+    category: "Otros 2",
+    price: "1000.00",
+    stock: 15,
+    image: "/images/2o1.jpg"
+  },
+  {
+    id: 138,
+    name: "Lasqueador de huevo",
+    category: "Otros 2",
+    price: "1200.00",
+    stock: 10,
+    image: "/images/2o2.jpg"
+  },
+  {
+    id: 139,
+    name: "Dispensador de detergente + esponja",
+    category: "Otros 2",
+    price: "1200.00",
+    stock: 10,
+    image: "/images/2o3.jpg"
+  },
+  {
+    id: 140,
+    name: "Condimentero de 3 piezas Cada envase incluye su cucharita",
+    category: "Otros 2",
+    price: "1600.00",
+    stock: 8,
+    image: "/images/2o4.jpg"
+  },
+  {
+    id: 141,
+    name: "Espátula para dulce",
+    category: "Otros 2",
+    price: "1800.00",
+    stock: 5,
+    image: "/images/2o5.jpg"
+  },
+  {
+    id: 142,
+    name: "Hielera plástica Solo para hielo, no botellas Incluye 1 pinza",
+    category: "Otros 2",
+    price: "2500.00",
+    stock: 3,
+    image: "/images/2o6.jpg"
+  },
+  {
+    id: 143,
+    name: "Rejilla para asar pescado",
+    category: "Otros 2",
+    price: "3000.00",
+    stock: 5,
+    image: "/images/2o7.jpg"
+  },
+  {
+    id: 144,
+    name: "Set de 3 piezas BBQ Tenedor Pinza Espátula",
+    category: "Otros 2",
+    price: "3500.00",
+    stock: 3,
+    image: "/images/2o8.jpg"
+  },
+  {
+    id: 145,
+    name: "Sombrillitas desechables 100 unidades",
+    category: "Otros 2",
+    price: "4000.00",
+    stock: 3,
+    image: "/images/2o9.jpg"
+  },
+  {
+    id: 146,
+    name: "Cesto para basura de 50L Color disponible: Carmelita",
+    category: "Otros 2",
+    price: "0.00",
+    stock: 0,
+    image: "/images/2o10.jpg"
+  },
+  {
+    id: 147,
+    name: "Cesto para basura de 50L",
+    category: "Otros 2",
+    price: "8000.00",
+    stock: 3,
+    image: "/images/2o11.jpg"
+  },
       
       // Venenos
-      { id: 137, name: "Veneno para moscas 100 unidades", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 138, name: "Veneno para hormigas", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 139, name: "Veneno para cucarachas 8gramos", category: "Venenos", price: "200.00", stock: 25, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 140, name: "Incienso para mosquitos Aprox 30u", category: "Venenos", price: "450.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 141, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" }
+      { id: 148, name: "Veneno para moscas 100 unidades", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 149, name: "Veneno para hormigas", category: "Venenos", price: "150.00", stock: 30, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 150, name: "Veneno para cucarachas 8gramos", category: "Venenos", price: "200.00", stock: 25, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 152, name: "Incienso para mosquitos Aprox 30u", category: "Venenos", price: "450.00", stock: 20, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      { id: 153, name: "Trampa para ratones pegajosa", category: "Venenos", price: "500.00", stock: 15, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
     ];
 
     let cart = [];
