@@ -408,9 +408,8 @@ function scrollToFirstProduct(category) {
     if (firstProduct) {
       const headerHeight = document.querySelector('header').offsetHeight;
       const categoryBarHeight = document.querySelector('.bg-gray-100.overflow-x-auto').offsetHeight;
-      const totalOffset = headerHeight + categoryBarHeight;
+      const totalOffset = headerHeight + categoryBarHeight + 20; // Añadimos 20px adicionales
 
-      // Hacer scroll suave con offset
       window.scrollTo({
         top: firstProduct.getBoundingClientRect().top + window.scrollY - totalOffset,
         behavior: 'smooth'
