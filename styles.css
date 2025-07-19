@@ -1,3 +1,15 @@
+/* Estilo para botón de categoría seleccionado */
+.category-button.selected {
+  background-color: #4F46E5; /* Indigo-600 */
+  color: white;
+  font-weight: bold;
+}
+
+/* Estilo para resaltar el primer producto */
+.product-card.highlighted {
+  border: 2px solid #4F46E5;
+  box-shadow: 0 0 0 2px #4F46E5 inset;
+}
 /* Reset básico */
 * {
   margin: 0;
