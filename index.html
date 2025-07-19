@@ -408,7 +408,7 @@ function scrollToFirstProduct(category) {
     if (firstProduct) {
       const headerHeight = document.querySelector('header').offsetHeight;
       const categoryBarHeight = document.querySelector('.bg-gray-100.overflow-x-auto').offsetHeight;
-      const totalOffset = headerHeight + categoryBarHeight + 60; // 📌 Ajustado a 60px
+      const totalOffset = headerHeight + categoryBarHeight + 90; // 📌 Aumentado a 90px
 
       window.scrollTo({
         top: firstProduct.getBoundingClientRect().top + window.scrollY - totalOffset,
