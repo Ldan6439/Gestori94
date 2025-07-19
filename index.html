@@ -399,14 +399,22 @@
 
 function scrollToFirstProduct(category) {
   const filtered = products.filter(product => 
-    (activeCategory === 'all' || product.category === category)
+    (activeCategory === 'all' || product.category === activeCategory) &&
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (filtered.length > 0) {
-    // Busca el primer producto del DOM que coincida con la categoría
     const firstProduct = document.querySelector(`.product-card[data-category="${category}"]`);
     if (firstProduct) {
-      firstProduct.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const headerHeight = document.querySelector('header').offsetHeight;
+      const categoryBarHeight = document.querySelector('.bg-gray-100.overflow-x-auto').offsetHeight;
+      const totalOffset = headerHeight + categoryBarHeight;
+
+      // Hacer scroll suave con offset
+      window.scrollTo({
+        top: firstProduct.getBoundingClientRect().top + window.scrollY - totalOffset,
+        behavior: 'smooth'
+      });
     }
   }
 }
