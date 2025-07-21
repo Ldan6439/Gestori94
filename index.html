@@ -95,172 +95,30 @@
 </header>
     
     <!-- Categorías -->
-    <!-- Fila de categorías -->
-<div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2 sticky top-[123px] z-50">
+    <div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2 sticky top-[123px] z-50">
   <div class="container mx-auto px-4">
-    <!-- Botón "all" (estilo único) -->
-    <button 
-      id="category-all" 
-      onclick="setActiveCategory('all')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-600 text-white transition-colors">
-      all
-    </button>
-
-    <!-- Botón "Absorbentes" -->
-    <button 
-      id="category-Absorbentes" 
-      onclick="setActiveCategory('Absorbentes')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Absorbentes
-    </button>
-
-    <!-- Botón "Servilletas" -->
-    <button 
-      id="category-Servilletas" 
-      onclick="setActiveCategory('Servilletas')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Servilletas
-    </button>
-
-    <!-- Botón "Palillos" -->
-    <button 
-      id="category-Palillos" 
-      onclick="setActiveCategory('Palillos')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Palillos
-    </button>
-
-    <!-- Botón "Bolsas" -->
-    <button 
-      id="category-Bolsas" 
-      onclick="setActiveCategory('Bolsas')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Bolsas
-    </button>
-
-    <!-- Botón "Papel_Termico" -->
-    <button 
-      id="category-Papel_Termico" 
-      onclick="setActiveCategory('Papel_Termico')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Papel Térmico
-    </button>
-
-    <!-- Botón "Vasos_Desechables" -->
-    <button 
-      id="category-Vasos_Desechables" 
-      onclick="setActiveCategory('Vasos_Desechables')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Vasos Desechables
-    </button>
-
-    <!-- Botón "Envases" -->
-    <button 
-      id="category-Envases" 
-      onclick="setActiveCategory('Envases')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Envases
-    </button>
-
-    <!-- Botón "Platos_Y_Termopack" -->
-    <button 
-      id="category-Platos_Y_Termopack" 
-      onclick="setActiveCategory('Platos_Y_Termopack')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Platos Termopack
-    </button>
-
-    <!-- Botón "Retractil" -->
-    <button 
-      id="category-Retractil" 
-      onclick="setActiveCategory('Retractil')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Retráctil
-    </button>
-
-    <!-- Botón "Ceniceros" -->
-    <button 
-      id="category-Ceniceros" 
-      onclick="setActiveCategory('Ceniceros')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Ceniceros
-    </button>
-
-    <!-- Botón "Cristaleria" -->
-    <button 
-      id="category-Cristaleria" 
-      onclick="setActiveCategory('Cristaleria')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Cristalería
-    </button>
-
-    <!-- Botón "Aceiter_Vinag_Sale" -->
-    <button 
-      id="category-Aceiter_Vinag_Sale" 
-      onclick="setActiveCategory('Aceiter_Vinag_Sale')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Aceiteras
-    </button>
-
-    <!-- Botón "Tajin" -->
-    <button 
-      id="category-Tajin" 
-      onclick="setActiveCategory('Tajin')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Tajín
-    </button>
-
-    <!-- Botón "Moldes" -->
-    <button 
-      id="category-Moldes" 
-      onclick="setActiveCategory('Moldes')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Moldes
-    </button>
-
-    <!-- Botón "Abridores" -->
-    <button 
-      id="category-Abridores" 
-      onclick="setActiveCategory('Abridores')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Abridores
-    </button>
-
-    <!-- Botón "Cubiertos" -->
-    <button 
-      id="category-Cubiertos" 
-      onclick="setActiveCategory('Cubiertos')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Cubiertos
-    </button>
-
-    <!-- Botón "Otros" -->
-    <button 
-      id="category-Otros" 
-<!-- Fila de categorías -->
-<div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2 sticky top-[123px] z-50"><div class="container mx-auto px-4 flex items-center space-x-2">
-  <!-- Botones de categorías -->
-  <button id="category-all" onclick="setActiveCategory('all')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-600 text-white transition-colors whitespace-nowrap">all</button>
-  <button id="category-Absorbentes" onclick="setActiveCategory('Absorbentes')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Absorbentes</button>
-  <button id="category-Servilletas" onclick="setActiveCategory('Servilletas')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Servilletas</button>
-  <button id="category-Palillos" onclick="setActiveCategory('Palillos')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Palillos</button>
-  <button id="category-Bolsas" onclick="setActiveCategory('Bolsas')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Bolsas</button>
-  <button id="category-Papel_Termico" onclick="setActiveCategory('Papel_Termico')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Papel Térmico</button>
-  <button id="category-Vasos_Desechables" onclick="setActiveCategory('Vasos_Desechables')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Vasos Desechables</button>
-  <button id="category-Envases" onclick="setActiveCategory('Envases')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Envases</button>
-  <button id="category-Platos_Y_Termopack" onclick="setActiveCategory('Platos_Y_Termopack')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Platos Termopack</button>
-  <button id="category-Retractil" onclick="setActiveCategory('Retractil')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Retráctil</button>
-  <button id="category-Ceniceros" onclick="setActiveCategory('Ceniceros')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Ceniceros</button>
-  <button id="category-Cristaleria" onclick="setActiveCategory('Cristaleria')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Cristalería</button>
-  <button id="category-Aceiter_Vinag_Sale" onclick="setActiveCategory('Aceiter_Vinag_Sale')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Aceiteras</button>
-  <button id="category-Tajin" onclick="setActiveCategory('Tajin')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Tajín</button>
-  <button id="category-Moldes" onclick="setActiveCategory('Moldes')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Moldes</button>
-  <button id="category-Abridores" onclick="setActiveCategory('Abridores')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Abridores</button>
-  <button id="category-Cubiertos" onclick="setActiveCategory('Cubiertos')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Cubiertos</button>
-  <button id="category-Otros" onclick="setActiveCategory('Otros')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Otros</button>
-  <button id="category-Otros2" onclick="setActiveCategory('Otros2')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Otros2</button>
-  <button id="category-Venenos" onclick="setActiveCategory('Venenos')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Venenos</button>
-</div></div>
+    <button id="category-all" onclick="setActiveCategory('all')" class="category-button px-4 py-2 capitalize bg-indigo-600 text-white rounded-full">all</button>
+        <button id="category-Absorbentes" onclick="setActiveCategory('Absorbentes')" class="category-button px-4 py-2 capitalize hover:bg-gray-200 text-gray-800">Absorbentes</button>
+        <button id="category-Servilletas" onclick="setActiveCategory('Servilletas')" class="category-button px-4 py-2 capitalize hover:bg-gray-200 text-gray-800">Servilletas</button>
+        <button id="category-Palillos" onclick="setActiveCategory('Palillos')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Palillos</button>
+        <button id="category-Bolsas" onclick="setActiveCategory('Bolsas')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Bolsas</button>
+        <button id="category-Papel_Termico" onclick="setActiveCategory('Papel_Termico')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Papel_Termico</button>
+        <button id="category-Vasos_Desechables" onclick="setActiveCategory('Vasos_Desechables')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Vasos_Desechables</button>
+        <button id="category-Envases" onclick="setActiveCategory('Envases')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Envases</button>
+        <button id="category-Platos_Y_Termopack" onclick="setActiveCategory('Platos_Y_Termopack')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Platos_Y_Termopack</button>
+        <button id="category-Retractil" onclick="setActiveCategory('Retractil')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Retractil</button>
+        <button id="category-Ceniceros" onclick="setActiveCategory('Ceniceros')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Ceniceros</button>
+        <button id="category-Cristaleria" onclick="setActiveCategory('Cristaleria')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cristaleria</button>
+        <button id="category-Aceiter_Vinag_Sale" onclick="setActiveCategory('Aceiter_Vinag_Sale')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Aceiter_Vinag_Sale</button>
+        <button id="category-Tajin" onclick="setActiveCategory('Tajin')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Tajin</button>
+        <button id="category-Moldes" onclick="setActiveCategory('Moldes')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Moldes</button>
+        <button id="category-Abridores" onclick="setActiveCategory('Abridores')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Abridores</button>
+        <button id="category-Cubiertos" onclick="setActiveCategory('Cubiertos')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Cubiertos</button>
+        <button id="category-Otros"onclick="setActiveCategory('Otros')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Otros</button>
+        <button id="category-Otros2" onclick="setActiveCategory('Otros2')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Otros2</button>
+        <button id="category-Venenos" onclick="setActiveCategory('Venenos')" class="category-button px-4 py-2 capitalize whitespace-nowrap hover:bg-gray-200">Venenos</button>
+      </div>
+    </div>
   </header>
 
   <!-- Contenido principal -->
@@ -411,7 +269,7 @@
       
       // Moldes
       { id: 67, name: "Molde para empanadas", category: "Moldes", price: "800.00", stock: 15, image: " images/IMG_20250718_185045.jpg" },
-      { id: 68, name: "Moldes para cookies 12 piezas", category: "", price: "800.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      { id: 68, name: "Moldes para cookies 12 piezas", category: "Moldes", price: "800.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
       { id: 69, name: "Molde para hamburguesa Acero inoxidable 10.6cm diámetro 2.5cm alto", category: "Moldes", price: "1200.00", stock: 10, image: " images/IMG_20250718_185514.jpg" },
       { id: 70, name: "Molde de repostería metálico 22cm", category: "Moldes", price: "1500.00", stock: 8, image: " images/IMG_20250718_185729.jpg" },
       { id: 71, name: "Molde de repostería metálico 28x15cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
@@ -518,41 +376,27 @@
     }
     
     function setActiveCategory(category) {
-  // 1. Restablecer todos los botones a estilo por defecto
+  // Resetear todos los botones a su estilo original
   document.querySelectorAll('.category-button').forEach(btn => {
     btn.classList.remove('bg-indigo-600', 'text-white');
-    btn.classList.add('bg-indigo-100', 'text-indigo-800', 'hover:bg-indigo-200');
+    btn.classList.add('hover:bg-gray-200', 'text-gray-800');
   });
 
-  // 2. Aplicar estilo activo al botón seleccionado
+  // Aplicar estilo al botón seleccionado
   const activeButton = document.getElementById(`category-${category.replace(/[^a-zA-Z0-9]/g, '_')}`);
   if (activeButton) {
-    activeButton.classList.remove('bg-indigo-100', 'text-indigo-800', 'hover:bg-indigo-200');
+    activeButton.classList.remove('hover:bg-gray-200', 'text-gray-800');
     activeButton.classList.add('bg-indigo-600', 'text-white');
   }
 
-  // 3. Actualizar categoría activa
+  // Actualizar categoría y renderizar productos
   activeCategory = category;
   document.getElementById('categoryTitle').innerText = 
-    (activeCategory === 'all') ? 'Todas las categorías' : `Productos en ${activeCategory}`;
-
-  // 4. Renderizar contenido según la categoría
-  if (category === 'all') {
-    renderAllCategories(); // Muestra categorías con conteo de productos
-  } else {
-    const container = document.getElementById('productsContainer');
-    container.innerHTML = `
-      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-    `;
-    renderProducts(); // Muestra productos normales
-  }
+    (activeCategory === 'all') ? 'Todos los productos' : activeCategory;
+  renderProducts();
+  setTimeout(() => scrollToFirstProduct(category), 100);
 }
 
-function countProductsByCategory(category) {
-  if (category === 'all') return products.length;
-  return products.filter(p => p.category === category).length;
-}
-    
 function scrollToFirstProduct(category) {
   const filtered = products.filter(product => 
     (activeCategory === 'all' || product.category === activeCategory) &&
@@ -718,4 +562,4 @@ function scrollToFirstProduct(category) {
     });
   </script>
 </body>
-            </html
+</html>
