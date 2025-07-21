@@ -516,27 +516,35 @@
     }
     
     function setActiveCategory(category) {
-  // Resetear todos los botones a su estilo original
+  // 1. Restablecer todos los botones a estilo por defecto
   document.querySelectorAll('.category-button').forEach(btn => {
     btn.classList.remove('bg-indigo-600', 'text-white');
-    btn.classList.add('hover:bg-gray-200', 'text-gray-800');
+    btn.classList.add('bg-indigo-100', 'text-indigo-800', 'hover:bg-indigo-200');
   });
 
-  // Aplicar estilo al botón seleccionado
+  // 2. Aplicar estilo activo al botón seleccionado
   const activeButton = document.getElementById(`category-${category.replace(/[^a-zA-Z0-9]/g, '_')}`);
   if (activeButton) {
-    activeButton.classList.remove('hover:bg-gray-200', 'text-gray-800');
+    activeButton.classList.remove('bg-indigo-100', 'text-indigo-800', 'hover:bg-indigo-200');
     activeButton.classList.add('bg-indigo-600', 'text-white');
   }
 
-  // Actualizar categoría y renderizar productos
+  // 3. Actualizar categoría activa
   activeCategory = category;
   document.getElementById('categoryTitle').innerText = 
-    (activeCategory === 'all') ? 'Todos los productos' : activeCategory;
-  renderProducts();
-  setTimeout(() => scrollToFirstProduct(category), 100);
-}
+    (activeCategory === 'all') ? 'Todas las categorías' : `Productos en ${activeCategory}`;
 
+  // 4. Renderizar contenido según la categoría
+  if (category === 'all') {
+    renderAllCategories(); // Muestra categorías con conteo de productos
+  } else {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = `
+      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    `;
+    renderProducts(); // Muestra productos normales
+  }
+}
 function scrollToFirstProduct(category) {
   const filtered = products.filter(product => 
     (activeCategory === 'all' || product.category === activeCategory) &&
