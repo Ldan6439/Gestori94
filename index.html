@@ -545,6 +545,12 @@
     renderProducts(); // Muestra productos normales
   }
 }
+
+function countProductsByCategory(category) {
+  if (category === 'all') return products.length;
+  return products.filter(p => p.category === category).length;
+}
+    
 function scrollToFirstProduct(category) {
   const filtered = products.filter(product => 
     (activeCategory === 'all' || product.category === activeCategory) &&
