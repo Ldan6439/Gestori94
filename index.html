@@ -237,28 +237,30 @@
     <!-- Botón "Otros" -->
     <button 
       id="category-Otros" 
-      onclick="setActiveCategory('Otros')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Otros
-    </button>
-
-    <!-- Botón "Otros2" -->
-    <button 
-      id="category-Otros2" 
-      onclick="setActiveCategory('Otros2')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Otros 2
-    </button>
-
-    <!-- Botón "Venenos" -->
-    <button 
-      id="category-Venenos" 
-      onclick="setActiveCategory('Venenos')" 
-      class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
-      Venenos
-    </button>
-  </div>
-</div>
+<!-- Fila de categorías -->
+<div class="bg-gray-100 overflow-x-auto whitespace-nowrap pb-2 sticky top-[123px] z-50"><div class="container mx-auto px-4 flex items-center space-x-2">
+  <!-- Botones de categorías -->
+  <button id="category-all" onclick="setActiveCategory('all')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-600 text-white transition-colors whitespace-nowrap">all</button>
+  <button id="category-Absorbentes" onclick="setActiveCategory('Absorbentes')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Absorbentes</button>
+  <button id="category-Servilletas" onclick="setActiveCategory('Servilletas')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Servilletas</button>
+  <button id="category-Palillos" onclick="setActiveCategory('Palillos')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Palillos</button>
+  <button id="category-Bolsas" onclick="setActiveCategory('Bolsas')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Bolsas</button>
+  <button id="category-Papel_Termico" onclick="setActiveCategory('Papel_Termico')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Papel Térmico</button>
+  <button id="category-Vasos_Desechables" onclick="setActiveCategory('Vasos_Desechables')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Vasos Desechables</button>
+  <button id="category-Envases" onclick="setActiveCategory('Envases')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Envases</button>
+  <button id="category-Platos_Y_Termopack" onclick="setActiveCategory('Platos_Y_Termopack')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Platos Termopack</button>
+  <button id="category-Retractil" onclick="setActiveCategory('Retractil')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Retráctil</button>
+  <button id="category-Ceniceros" onclick="setActiveCategory('Ceniceros')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Ceniceros</button>
+  <button id="category-Cristaleria" onclick="setActiveCategory('Cristaleria')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Cristalería</button>
+  <button id="category-Aceiter_Vinag_Sale" onclick="setActiveCategory('Aceiter_Vinag_Sale')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Aceiteras</button>
+  <button id="category-Tajin" onclick="setActiveCategory('Tajin')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Tajín</button>
+  <button id="category-Moldes" onclick="setActiveCategory('Moldes')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Moldes</button>
+  <button id="category-Abridores" onclick="setActiveCategory('Abridores')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Abridores</button>
+  <button id="category-Cubiertos" onclick="setActiveCategory('Cubiertos')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Cubiertos</button>
+  <button id="category-Otros" onclick="setActiveCategory('Otros')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Otros</button>
+  <button id="category-Otros2" onclick="setActiveCategory('Otros2')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Otros2</button>
+  <button id="category-Venenos" onclick="setActiveCategory('Venenos')" class="category-button w-32 h-10 rounded-full flex items-center justify-center bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors whitespace-nowrap">Venenos</button>
+</div></div>
   </header>
 
   <!-- Contenido principal -->
