@@ -154,15 +154,10 @@
           <span class="font-bold">Total:</span>
           <span id="totalPrice" class="font-bold">₱0.00</span>
         </div>
-        <!-- Formulario de cliente -->
-<div class="space-y-3 mb-4">
-  <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded" required />
-  <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded" required />
-  <!-- Campo de dirección (solo aparece si se selecciona mensajería) -->
-  <div id="deliveryAddressField" class="hidden">
-    <input type="text" id="deliveryAddress" placeholder="Dirección de entrega" class="w-full px-3 py-2 border rounded" required />
-  </div>
-</div>
+        <div class="space-y-3 mb-4">
+          <input type="text" id="customerName" placeholder="Nombre completo" class="w-full px-3 py-2 border rounded" required />
+          <input type="text" id="customerPhone" placeholder="Teléfono (ej: 5352663106)" class="w-full px-3 py-2 border rounded" required />
+        </div>
         <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-bold transition-colors flex items-center justify-center">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.072.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
@@ -480,49 +475,40 @@ function scrollToFirstProduct(category) {
     }
     
     function updateCart() {
-  const cartItems = document.getElementById('cartItems');
-  cartItems.innerHTML = '';
-  
-  if (cart.length === 0) {
-    cartItems.innerHTML = `<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>`;
-    document.getElementById('cartSummary').classList.add('hidden');
-    document.getElementById('cartCount').classList.add('hidden');
-    return;
-  }
-
-  let totalPrice = 0;
-  cart.forEach(item => {
-    totalPrice += parseFloat(item.price) * item.quantity;
-    const cartItem = document.createElement('div');
-    cartItem.className = "flex items-center border rounded-lg p-3 mb-2";
-    cartItem.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4">
-      <div class="flex-grow">
-        <h4 class="font-medium">${item.name}</h4>
-        <p class="text-gray-600">₱${item.price}</p>
-      </div>
-      <div class="flex items-center">
-        <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
-        <span class="mx-2">${item.quantity}</span>
-        <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
-      </div>
-    `;
-    cartItems.appendChild(cartItem);
-  });
-
-  document.getElementById('cartSummary').classList.remove('hidden');
-  document.getElementById('totalPrice').innerText = `₱${totalPrice.toFixed(2)}`;
-  document.getElementById('cartCount').classList.remove('hidden');
-  document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  // Muestra el campo de dirección solo si se selecciona "mensajería"
-  const serviceType = document.getElementById('serviceType')?.value;
-  if (serviceType === 'Delivery') {
-    document.getElementById('deliveryAddressField').classList.remove('hidden');
-  } else {
-    document.getElementById('deliveryAddressField').classList.add('hidden');
-  }
-}
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = `<p class="text-red-500 text-2xl font-bold text-center py-8">Su carrito está vacío</p>`;
+        document.getElementById('cartSummary').classList.add('hidden');
+        document.getElementById('cartCount').classList.add('hidden');
+        return;
+      }
+      
+      let totalPrice = 0;
+      cart.forEach(item => {
+        totalPrice += parseFloat(item.price) * item.quantity;
+        cartItems.innerHTML += `
+          <div class="flex items-center border rounded-lg p-3 mb-2">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4" />
+            <div class="flex-grow">
+              <h4 class="font-medium">${item.name}</h4>
+              <p class="text-gray-600">₱${item.price}</p>
+            </div>
+            <div class="flex items-center">
+              <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">-</button>
+              <span class="mx-2 w-8 text-center">${item.quantity}</span>
+              <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700">+</button>
+            </div>
+          </div>
+        `;
+      });
+      
+      document.getElementById('cartSummary').classList.remove('hidden');
+      document.getElementById('totalPrice').innerText = `₱${totalPrice.toFixed(2)}`;
+      document.getElementById('cartCount').classList.toggle('hidden', cart.length === 0);
+      document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
     
     function updateQuantity(id, delta) {
   const item = cart.find(i => i.id === id);
@@ -538,38 +524,26 @@ function scrollToFirstProduct(category) {
 }
     
     function sendToWhatsApp() {
-  if (cart.length === 0) {
-    showNotification('El carrito está vacío');
-    return;
-  }
-
-  const name = document.getElementById('customerName').value;
-  const phone = document.getElementById('customerPhone').value;
-  const address = document.getElementById('deliveryAddress')?.value || '';
-  const serviceType = document.getElementById('serviceType')?.value || 'Takeaway';
-
-  if (!name || !phone || (serviceType === 'Delivery' && !address)) {
-    showNotification('Completa todos los campos');
-    return;
-  }
-
-  let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\nTipo de servicio: ${serviceType}\n\nProductos:\n`);
-  cart.forEach(item => {
-    message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
-  });
-
-  if (serviceType === 'Delivery') {
-    message += encodeURIComponent(`\nDirección de entrega: ${address}`);
-  }
-
-  message += encodeURIComponent(`\nTotal: ₱${cart.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0).toFixed(2)}`);
-  
-  window.open(`https://wa.me/5352663106?text=${message}`, '_blank');
-  cart = [];
-  updateCart();
-  toggleCart();
-  showNotification('Pedido enviado por WhatsApp');
-}
+      const name = document.getElementById('customerName').value;
+      const phone = document.getElementById('customerPhone').value;
+      
+      if (!name || !phone) {
+        showNotification('Completa tu nombre y teléfono');
+        return;
+      }
+      
+      let message = encodeURIComponent(`PEDIDO GESTOR I94\nCliente: ${name}\nTeléfono: ${phone}\n\nProductos:\n`);
+      cart.forEach(item => {
+        message += encodeURIComponent(`${item.name} - Cantidad: ${item.quantity}\n`);
+      });
+      message += encodeURIComponent(`\nTotal: ₱${cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}`);
+      
+      window.open(` https://wa.me/5352663106?text=${message}`, '_blank');
+      cart = [];
+      updateCart();
+      toggleCart();
+      showNotification('Pedido enviado por WhatsApp');
+    }
     
     function showNotification(text) {
       const notification = document.getElementById('notification');
@@ -588,4 +562,4 @@ function scrollToFirstProduct(category) {
     });
   </script>
 </body>
-</html>
+    </html>
