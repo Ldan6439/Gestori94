@@ -172,21 +172,17 @@
   <script>
     const products = [
       // Absorbentes
-      { id: 1, name: "Absorbentes biodegradables 100 unidades", category: "", price: "0.00", stock: 0, image: " " },
-      { id: 2, name: "Absorbente plástico flexible 100 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1605787439554-8a2a4e53db43?auto=format&fit=crop&w=300&q=80" },
       { id: 3, name: "Absorbente plástico moldeable 100 unidades", category: "Absorbentes", price: "500.00", stock: 10, image: " images/Absorbente plástico moldeable.jpg" },
       { id: 4, name: "Absorbente para sueros y batidos 9mm ancho 100 unidades", category: "Absorbentes", price: "500.00", stock: 15, image: " images/Absorbente para sueros y batidos .jpg" },
       { id: 5, name: "Absorbentes clásicos finos 500 unidades 5mm", category: "Absorbentes", price: "1100.00", stock: 8, image: " images/Absorbentes clásicos finos .jpg" },
       
       // Servilletas
-      { id: 6, name: "Servilleta la excelencia 30x30cm 100 hojas doble", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1607083206173-5ac6a59f207e?auto=format&fit=crop&w=300&q=80" },
       { id: 7, name: "Servilletas prosa 40x40cm 40 hojas doble", category: "Servilletas", price: "500.00", stock: 12, image: "images/Servilletas prosa.jpg" },
       { id: 8, name: "Servilletas prosito 100 hojas simples 30x33cm", category: "Servilletas", price: "500.00", stock: 20, image: " images/Servilletas prosito .jpg" },
       
       // Palillos
       { id: 9, name: "Púas para cócteles Acero inoxidable", category: "Palillos", price: "200.00", stock: 15, image: " images/Púas para cócteles.jpg" },
       { id: 10, name: "Paquete de palillos 230 unidades (aprox)", category: "Palillos", price: "300.00", stock: 25, image: " images/Paquete de palillos.jpg" },
-      { id: 11, name: "Palitos para picaderas 100 unidades 10cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1583203550-3031-4c5f4c4c4c4c?auto=format&fit=crop&w=300&q=80" },
       { id: 12, name: "Pomito de palitos de diente 150 unidades (aprox)", category: "Palillos", price: "350.00", stock: 20, image: " images/Pomito de palitos de dientes.jpg" },
       { id: 13, name: "Brochetas de acero inoxidable Aprox 30cm", category: "Palillos", price: "400.00", stock: 15, image: " images/Brochetas de acero inoxidable.jpg" },
       { id: 14, name: "Palitos para brochetas 15 cm 200 unidades", category: "Palillos", price: "600.00", stock: 10, image: " images/Palitos para brochetas 15cm.jpg" },
@@ -195,8 +191,6 @@
       
       // Bolsas
       { id: 17, name: "Bolsas para desechos (negras) Rollo de 25 unidades", category: "Bolsas", price: "900.00", stock: 10, image: " images/Bolsas para desechos (negras).jpg" },
-      { id: 18, name: "Bolsa de asa troquelada (Papel liner) 29cm (alto) 20cm (ancho) 8cm (fuelle) 20 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 19, name: "Nylon para envasar y sellar 25x45cm 500 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
 
       // Papel_Termico
       { id: 20, name: "Rollo de papel térmico 57mm x 22m", category: "Papel_Termico", price: "250.00", stock: 30, image: " images/IMG_20250714_183255.jpg" },
@@ -206,31 +200,18 @@
       { id: 26, name: "Vaso con tapa plana 16onz 50 unidades", category: "Vasos_Desechables", price: "3250.00", stock: 8, image: " images/Vaso con tapa plana.jpg" },
       { id: 22, name: "Vasos desechables para café 3onz 100 unidades", category: "Vasos_Desechables", price: "500.00", stock: 20, image: " images/Vasos desechables para café.jpg" },
       { id: 23, name: "Vasos desechables 8onz 100 unidades", category: "Vasos_Desechables", price: "800.00", stock: 12, image: " images/Vasos desechables.jpg" },
-      { id: 24, name: "Vasos con tapa domo 12onz 50 unidades", category: "", price: "0.00", stock: 0, image: " images/Vasos con tapa domo 12onz" },
-      { id: 25, name: "Vasos con tapa domo 16onz 50 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1580636048610-a9a9c9c2e772?auto=format&fit=crop&w=300&q=80" },
       
       // Envases
       { id: 27, name: "Base domo para cake 23cm diametro 9cm alto", category: "Envases", price: "600.00", stock: 10, image: " images/Base domo para cake.jpg" },
       { id: 28, name: "Base domo para cake 31.5cm diametro 15cm alto", category: "Envases", price: "750.00", stock: 15, image: " images/IMG_20250714_182252.jpg" },
-      { id: 29, name: "Envase salsero con tapa 1onz 100 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
-      { id: 30, name: "Envase salsero con tapa 2onz 100 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
-      { id: 31, name: "Envase rectangular con tapa 8onz 50 unidades Admiten microwave", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
-      { id: 32, name: "Envase rectangular Deli con tapa 1L~32onz Admiten microwave 25unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-16000723746ab7d0d44cd2?auto=format&fit=crop&w=300&q=80" },
       
       // Platos_Y_Termopack
-      { id: 33, name: "Plato desechable (plástico) 22cm 25 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 34, name: "Plato desechable de poliestireno 22cm 25 unidades", category: "Platos_Y_Termopack", price: "1100.00", stock: 12, image: " images/Plato desechable de poliestireno.jpg" },
       { id: 35, name: "Bandeja desechable 18.4cm largo 23.7cm ancho 2.76cm alto 125unidades", category: "Platos_Y_Termopack", price: "5000.00", stock: 5, image: " images/Bandeja desechable.jpg" },
-      { id: 36, name: "Termopack 7x9 pulgadas 50 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901794374-d9d7ca9b8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 37, name: "Termopack 8x8 pulgadas 200 unidades", category: "Platos_Y_Termopack", price: "13200.00", stock: 8, image: " images/IMG_20250718_142328.jpg" },
       
       // Retractil
-      { id: 38, name: "Rollo de nylon retráctil 2kg 45cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
-      { id: 39, name: "Retráctil blanco 3.5kg 50cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
-      { id: 40, name: "Nylon retráctil amarillo profesional (nylon extra fino) 45.7cm (alto) 609.6m (largo) viene con su cuchilla para cortar", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
       { id: 41, name: "Rollo de nylon retráctil blanco 50cm alto 6kg", category: "Retractil", price: "7000.00", stock: 5, image: " images/IMG_20250718_142939.jpg" },
-      { id: 42, name: "Nylon retráctil amarillo profesional (nylon extra fino) 60.9cm (alto) 609.6m (largo) viene con su cuchilla para cortar", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
-      { id: 43, name: "Retráctil profesional blanco 50cm 9kg", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1610800704843-46fd59540f819d8d71a46?auto=format&fit=crop&w=300&q=80" },
       { id: 44, name: "Retráctil profesional 45.72cm x 1520m", category: "Retractil", price: "15000.00", stock: 3, image: " images/IMG_20250718_143533.jpg" },
       { id: 45, name: "Retráctil profesional Para alimentos 45cm x 1500m", category: "Retractil", price: "15000.00", stock: 3, image: " images/IMG_20250718_143830.jpg" },
       
@@ -243,13 +224,9 @@
 // Cristalería
 { id: 50, name: "Jarra de cristal para batido Viene con su absorbente 500ml~16onz", category: "Cristaleria", price: "1000.00", stock: 8, image: "images/Jarra de cristal para batido.jpg" },
 { id: 51, name: "Jarra con tapa y absorbente Forma de cactus 500ml~16o", category: "Cristaleria", price: "1000.00", stock: 8, image: "images/IMG_20250718_150644.jpg" },
-{ id: 52, name: "Vasos para ron Estilo boston chiquitos 55ml-1.86onz 6 unidades", category: "", price: "0.00", stock: 0, image: "https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
 { id: 53, name: "Shots para tequila (diseño elegante) 50ml~1.69onz 6 unidades", category: "Cristaleria", price: "1800.00", stock: 10, image: "images/Shots para tequila (diseño elegante).jpg" },
-{ id: 54, name: "Vaso para shots de tequila Cristal 6 unidades 50ml ~1.69onz", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
 { id: 55, name: "Vasos para shots de tequila 6 unidades 50ml-1.69onz Colores disponibles Azul Rosa", category: "Cristaleria", price: "1800.00", stock: 10, image: "images/Vasos para shots tk6u.jpg" },
-{ id: 56, name: "Jarra para cerveza 2 unidades 510 ml~17onz", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
 { id: 57, name: "Vasos para ron 6 unidades 170 ml ~5.8onz", category: "Cristaleria", price: "2200.00", stock: 12, image: "images/IMG_20250718_151719.jpg" },
-{ id: 58, name: "Tazas para té 250ml~8.5onz 6 unidades", category: "", price: "2800.00", stock: 0, image: " https://images.unsplash.com/photo-1586901684013-02345bc32f99?auto=format&fit=crop&w=300&q=80" },
 { id: 59, name: "Vasos (modelo San Marco) (No son Havana Club) 6 unidades 300ml ~10onz", category: "Cristaleria", price: "2800.00", stock: 10, image: " images/Vasos mdsm.jpg" },
 { id: 60, name: "Vasos para tragos 6 unidades 270 ml~9.13onz", category: "Cristaleria", price: "2900.00", stock: 10, image: " images/Vasos ptg6u.jpg" },
 { id: 61, name: "Vasos para whisky 270ml~9onz 6 unidades", category: "Cristaleria", price: "3000.00", stock: 10, image: " images/IMG_20250718_183046.jpg" },
@@ -261,47 +238,34 @@
       // Aceiter_Vinag_Sale
 {id: 142, name: "Salero/pimentero de cristal 2 piezas Base con servilletero", category: "Aceiter_Vinag_Sale", price: "2000.00", stock: 10, image: "images/IMG_20250718_184453.jpg " },
 {id: 143, name: "Set de aceitera/vinagrera 2 unidades", category: "Aceiter_Vinag_Sale", price: "2000.00", stock: 15, image: "images/IMG_20250718_184650.jpg " },
-{id: 144, name: "Salero/pimentero/azucarero 3 piezas Base con servilletero Incluye cucharita pequeña", category: "", price: "2000.00", stock: 0, image: "https://picsum.photos/seed/salero3/300/300 " },
-      
+
       // Tajin
-      { id: 145, name: "Tajin 142gr", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 66, name: "Chile en polvo con limón Aurrera (Tajín) 160gr", category: "Tajin", price: "1900.00", stock: 20, image: " images/IMG_20250718_184839.jpg" },
       
       // Moldes
       { id: 67, name: "Molde para empanadas", category: "Moldes", price: "800.00", stock: 15, image: " images/IMG_20250718_185045.jpg" },
-      { id: 68, name: "Moldes para cookies 12 piezas", category: "", price: "800.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
+      
       { id: 69, name: "Molde para hamburguesa Acero inoxidable 10.6cm diámetro 2.5cm alto", category: "Moldes", price: "1200.00", stock: 10, image: " images/IMG_20250718_185514.jpg" },
       { id: 70, name: "Molde de repostería metálico 22cm", category: "Moldes", price: "1500.00", stock: 8, image: " images/IMG_20250718_185729.jpg" },
-      { id: 71, name: "Molde de repostería metálico 28x15cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
       { id: 72, name: "Molde de respostería en forma de oso", category: "Moldes", price: "2000.00", stock: 5, image: " images/IMG_20250718_185922.jpg" },
-      { id: 73, name: "Bandeja tortera 47x32cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1599553730904-9fa02c85b64d?auto=format&fit=crop&w=300&q=80" },
       
       // Abridores
       { id: 74, name: "Abridor de botella", category: "Abridores", price: "1000.00", stock: 15, image: " images/IMG_20250718_190135.jpg" },
-      { id: 75, name: "Sacacorchos metálico", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
-      { id: 76, name: "Abridor de lata metálico", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 77, name: "Abridor para botella de cerveza Acero inoxidable 18cm", category: "Abridores", price: "1800.00", stock: 10, image: " images/IMG_20250718_190332.jpg" },
       
       // Cubiertos
       { id: 78, name: "Cucharitas para café 6 unidades 10cm", category: "Cubiertos", price: "800.00", stock: 15, image: " images/IMG_20250718_190557.jpg" },
-      { id: 79, name: "Cuchara de metal 6 unidades 19cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
+      
       { id: 80, name: "Tenedores de metal 6 unidades 19cm", category: "Cubiertos", price: "1000.00", stock: 12, image: " images/IMG_20250718_190734.jpg" },
       { id: 81, name: "Cuchillos de mesa 23cm 6u", category: "Cubiertos", price: "1000.00", stock: 12, image: " images/IMG_20250718_190921.jpg" },
       { id: 82, name: "Cuchara de metal 18cm 12 unidades", category: "Cubiertos", price: "1200.00", stock: 10, image: " images/IMG_20250718_191138.jpg" },
-      { id: 83, name: "Tenedores desechables Transparentes 100 unidades", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 84, name: "Cucharas desechables Transparentes 100 unidades", category: "Cubiertos", price: "1200.00", stock: 10, image: " images/IMG_20250718_191323.jpg" },
       { id: 85, name: "Cuchillo sierra de acero inoxidable 22cm 6unidades Ideal para cortes de carnes", category: "Cubiertos", price: "1600.00", stock: 8, image: " images/IMG_20250718_191519.jpg" },
-      { id: 86, name: "Cuchillo tipo hacha 30cm", category: "", price: "0.00", stock: 0, image: " https://images.unsplash.com/photo-1601823584572-8abc8c8c659c?auto=format&fit=crop&w=300&q=80" },
       { id: 87, name: "Set de cuchillos 5 piezas", category: "Cubiertos", price: "4000.00", stock: 5, image: " images/IMG_20250718_191659.jpg" },
       
       // Otros
-      { id: 92, name: "Frazada de piso", category: "", price: "250.00", stock: 0, image: "images/O1.jpg" },
-{ id: 93, name: "Esponjas multiusos 10 unidades", category: "", price: "0.00", stock: 0, image: "images/O2.jpg" },
 { id: 94, name: "Mini soporte para tacos", category: "Otros", price: "600.00", stock: 20, image: "images/O3.jpg" },
 { id: 95, name: "Set de limpieza 2 estropajos 2 esponjas 1 portaestropajos", category: "Otros", price: "600.00", stock: 15, image: "images/O4.jpg" },
-{ id: 96, name: "Cortador de papa", category: "", price: "650.00", stock: 0, image: "images/O5.jpg" },
-{ id: 97, name: "Pinza media luna 29cm aprox Acero inoxidable", category: "", price: "0.00", stock: 0, image: "images/O6.jpg" },
-{ id: 98, name: "Pinza de acero inoxidable 28.5 cm alto", category: "", price: "0.00", stock: 0, image: "images/O7.jpg" },
 { id: 99, name: "Tamiz de polvo Colador de filtro fino", category: "Otros", price: "800.00", stock: 8, image: "images/O8.jpg" },
 { id: 100, name: "Servilletero Acero inoxidable", category: "Otros", price: "800.00", stock: 8, image: "images/O9.jpg" },
 { id: 101, name: "Rebanador de papa", category: "Otros", price: "800.00", stock: 12, image: "images/O10.jpg" },
@@ -310,7 +274,6 @@
 { id: 104, name: "Paquete de ligas 170-180 unidades", category: "Otros", price: "900.00", stock: 15, image: "images/O13.jpg" },
 { id: 105, name: "Servilletero para exteriores Acero inoxidable Ideal para lugares abiertos o con mucho aire Su presilla no permite que las servilletas se vuelen", category: "Otros", price: "900.00", stock: 10, image: "images/O14.jpg" },
 { id: 106, name: "Precinta transparente (Scotch Tape) Medidas: 5cm (ancho)×11cm (diámetro)×1.5cm (grosor) 100metros", category: "Otros", price: "1000.00", stock: 15, image: "images/O15.jpg" },
-{ id: 107, name: "Cesta tejida para pan (plástica) 23cm×13cm(base)×9cm(alto)", category: "", price: "1000.00", stock: 0, image: "images/O16.jpg" },
 { id: 108, name: "Juego de embudos de 3 piezas", category: "Otros", price: "1000.00", stock: 15, image: "images/O17.jpg" },
 { id: 109, name: "Exprimidor de naranja", category: "Otros", price: "1000.00", stock: 15, image: "images/O18ok.jpg" },
 { id: 110, name: "Palas plásticas multiusos 3 unidades", category: "Otros", price: "1000.00", stock: 15, image: "images/O19.jpg" },
@@ -330,18 +293,12 @@
 { id: 124, name: "Pala para hielo Acero inoxidable", category: "Otros", price: "1500.00", stock: 8, image: "images/O33.jpg" },
 { id: 125, name: "Afilador manual para cuchillos", category: "Otros", price: "1600.00", stock: 8, image: "images/O34.jpg" },
 { id: 126, name: "Triturador de ajo Acero inoxidable", category: "Otros", price: "1700.00", stock: 8, image: "images/O35.jpg" },
-{ id: 127, name: "Cuchillos BBQ 42 cm", category: "", price: "0.00", stock: 0, image: "images/O36.jpg" },
 { id: 128, name: "Dispensadores para salsas 2 unidades", category: "Otros", price: "1800.00", stock: 10, image: "images/O37.jpg" },
-{ id: 129, name: "Tenedor para BBQ 38.6x3.8cm Mango de madera", category: "Otros", price: "2000.00", stock: 0, image: "images/O38.jpg" },
-{ id: 130, name: "Rodillo de acero inoxidable Mango de madera Centro giratorio", category: "", price: "0.00", stock: 0, image: "images/O39.jpg" },
 { id: 131, name: "Rodillo de silicona Antiadherente Mango de madera Centro giratorio", category: "Otros", price: "2000.00", stock: 5, image: "images/O40.jpg" },
 { id: 132, name: "Colador de espiral", category: "Otros", price: "2000.00", stock: 5, image: "images/O41.jpg" },
 { id: 133, name: "Set de cocina 5 piezas", category: "Otros", price: "2300.00", stock: 3, image: "images/O42.jpg" },
 { id: 134, name: "Espátula para BBQ 41cm Mango de madera ", category: "Otros", price: "2300.00", stock: 5, image: "images/O43.jpg" },
-{ id: 135, name: "Espumero de café Plástico duro 350ml Cucharilla incluida ", category: "Otros", price: "2500.00", stock: 15, image: "images/O44.jpg" },
-{ id: 136, name: "Boleadora (tipo cuchara)", category: "", price: "2500.00", stock: 0, image: "/images/O45.jpg" },
-{ id: 137, name: "Boleadora de helado 6 cm diámetro", category: "", price: "2500.00", stock: 0, image: "images/O46.jpg" },
-{ id: 138, name: "Boleadora de helado 5 cm diámetro", category: "", price: "2500.00", stock: 0, image: "images/O47.jpg" },
+{ id: 135, name: "Espumero de café Plástico duro 350ml Cucharilla incluida ", category: "Otros", price: "2500.00", stock: 15, image: "images/O44.jpg" },a
 { id: 139, name: "Removedores plásticos para cócteles 2 medidas en 1 Largo:17cm Corto: 12cm 100unidades", category: "Otros", price: "3000.00", stock: 10, image: "images/O48.jpg" },
 { id: 140, name: "Rejilla para asar carne 35cm largo 23cm ancho", category: "Otros", price: "3000.00", stock: 5, image: "images/O49.jpg" },
 { id: 141, name: "Cubos de hielo luminosos 12 unidades Sensor de líquido (cuando siente el líquido prende la luz)", category: "Otros", price: "5000.00", stock: 3, image: "images/O50.jpg" },
@@ -356,7 +313,6 @@
       {id: 148, name: "Rejilla para asar pescado", category: "Otros2", price: "3000.00", stock: 5, image: "images/2o7.jpg" },
       {id: 149, name: "Set de 3 piezas BBQ Tenedor Pinza Espátula", category: "Otros2", price: "3500.00", stock: 3, image: "images/2o8.jpg" },
       {id: 150, name: "Sombrillitas desechables 100 unidades", category: "Otros2", price: "4000.00", stock: 3, image: "images/2o9.jpg" },
-      {id: 151, name: "Cesto para basura de 50L Color disponible: Carmelita", category: "", price: "0.00", stock: 0, image: "images/2o10.jpg" },
       {id: 152, name: "Cesto para basura de 50L", category: "Otros2", price: "8000.00", stock: 3, image: "images/2o11.jpg" },
     
       // Venenos
