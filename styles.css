@@ -229,7 +229,21 @@ body {
 .quantity-controls button:hover {
   background: #d1d5db;
 }
+/* Asegura que el carrito se mantenga visible en móviles */
+#cartSidebar {
+  position: fixed;
+  bottom: 0;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Para evitar que el teclado esconda el formulario */
+}
 
+/* Asegura que el formulario no se recorte al abrir el teclado */
+@media (max-height: 480px) {
+  #cartSidebar {
+    max-height: 95vh;
+  }
+}
 /* Formulario del carrito */
 .cart-form {
   padding: 1.5rem;
