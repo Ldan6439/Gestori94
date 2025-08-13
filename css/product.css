@@ -1,7 +1,0 @@
-<input id="customerName" type="text" placeholder="Nombre completo" />
-<input id="customerPhone" type="text" placeholder="Teléfono (ej: 5352663106)" />
-<select id="deliveryOption" onchange="toggleAddressField()">
-  <option value="recogida">Recogida en tienda</option>
-  <option value="mensajeria">Mensajería</option>
-</select>
-<input id="customerAddress" type="text" placeholder="Dirección de envío" class="hidden" />
